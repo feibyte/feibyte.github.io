@@ -61,7 +61,16 @@ declare module "react-redux" {
 看样子是，只要在声明文件中导入之后，类型就被污染了。被污染的还有：Dispatch, Store, React, ComponentType and ElementConfig 不难猜到越是流行的库越可能被污染。而这一切发生的时候，flow.js 没有任何警告信息或错误提示。
 Known issue: https://github.com/flow-typed/flow-typed/issues/1857
 
-5. 关于 $FlowFixMe
+5. 第三方库
+
+时不时的第三方库导致 flow 错误，又不能 ignore 所有的 node_modules 文件，每次遇到新错误，都只能加载后面。甚至 node_modules/**/test/*.json 都有可能导致 flow 错误。 目前没有什么优雅的办法：https://github.com/facebook/flow/issues/869
+```
+[ignore]
+.*\/node_modules\/draft-js\/lib\/.*.js.flow.*
+```
+
+
+6. 关于 $FlowFixMe
 
 有时 flow 不够聪明，即使我们知道没有那个逻辑，当然有时我们可以绕过这些报错。个人认为用额外的逻辑来弥补 flow 的错误更不合适。$FlowFixMe 是很烦，但是至少不会引起困惑。
 
