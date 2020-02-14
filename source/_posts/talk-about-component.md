@@ -1,7 +1,7 @@
 ---
 title: "谈谈组件封装"
 date: 2015-05-14
-category: 总结
+categories: ["读书笔记"]
 tags: [组件]
 ---
 

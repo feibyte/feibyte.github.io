@@ -1,7 +1,7 @@
 ---
 title: "前端模板"
 date: 2013-10-15
-category: 造轮子
+categories: ["技术"]
 tags: [template]
 
 ---

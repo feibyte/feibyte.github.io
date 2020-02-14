@@ -1,6 +1,7 @@
 ---
 title: 谈谈测试与代码质量
 date: 2019-05-26 13:56:01
+categories: ["技术"]
 tags: 测试
 thumbnail: /gallery/thumbnails/testing.jpg
 ---

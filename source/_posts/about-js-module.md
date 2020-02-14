@@ -1,7 +1,7 @@
 ---
 title: "也谈 JS 模块"
 date: 2014-02-13
-category: 造轮子
+categories: ["技术"]
 tags: [Module SeaJS]
 ---
 

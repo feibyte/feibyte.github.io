@@ -1,7 +1,7 @@
 ---
 title: "AngularJS中的懒加载【翻译】"
 date: 2014-11-01
-category: 翻译
+categories: ["技术"]
 tags: [AngularJS lazyload]
 ---
 

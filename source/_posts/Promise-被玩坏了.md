@@ -1,6 +1,7 @@
 ---
 title: Promise 被玩坏了
 date: 2017-01-19 11:31:30
+categories: ["技术"]
 tags: ["Promise", "MutationObserver"]
 ---
 

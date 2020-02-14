@@ -1,7 +1,8 @@
 ---
 title: 《Making Yourself Indispensable》笔记
 date: 2019-06-10 16:02:49
-tags: 读书笔记
+categories: ["读书笔记"]
+tags: ["读书笔记", "个人管理"]
 thumbnail: /gallery/thumbnails/making-yourself-indispensable.jpeg
 ---
 

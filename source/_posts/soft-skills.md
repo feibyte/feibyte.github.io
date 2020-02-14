@@ -1,6 +1,7 @@
 ---
 title: 编程之外的软实力
 date: 2019-05-21 16:30:52
+categories: ["技术"]
 tags: 思考
 thumbnail: /gallery/thumbnails/soft-skills.jpg
 ---

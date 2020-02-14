@@ -1,7 +1,7 @@
 ---
 title: "Angular启动"
 date: 2014-10-31
-category: 心得总结
+categories: ["技术"]
 tags: [AngularJS]
 ---
 

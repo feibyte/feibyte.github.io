@@ -1,6 +1,7 @@
 ---
 title: Babel polyfill
 date: 2019-08-25 15:09:56
+categories: ["技术"]
 tags: babel
 thumbnail: /gallery/thumbnails/babel.png
 ---

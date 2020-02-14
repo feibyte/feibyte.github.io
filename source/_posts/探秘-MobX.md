@@ -1,6 +1,7 @@
 ---
 title: 探秘 MobX
 date: 2017-03-30 21:41:22
+categories: ["技术"]
 tags: ["MobX", "框架"]
 ---
 

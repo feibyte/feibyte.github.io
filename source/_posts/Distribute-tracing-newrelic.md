@@ -1,7 +1,8 @@
 ---
 title: Distribute tracing - newrelic
 date: 2020-01-07 21:57:05
-tags: 技术
+categories: ["技术"]
+tags: NewRelic
 thumbnail: /gallery/thumbnails/distributed-tracing.png
 ---
 

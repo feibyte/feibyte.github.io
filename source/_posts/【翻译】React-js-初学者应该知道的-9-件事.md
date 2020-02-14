@@ -1,6 +1,7 @@
 ---
 title: 【翻译】React.js 初学者应该知道的 9 件事
 date: 2016-07-18 16:24:56
+categories: ["技术"]
 tags: ["翻译", "React"]
 ---
 

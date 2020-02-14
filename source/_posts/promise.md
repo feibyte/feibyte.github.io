@@ -1,7 +1,7 @@
 ---
 title: "前端三俗之Promise"
 date: 2014-03-29
-category: 造轮子
+categories: ["技术"]
 tags: [Promise]
 ---
 

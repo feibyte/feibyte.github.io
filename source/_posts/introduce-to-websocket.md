@@ -1,7 +1,7 @@
 ---
 title: introduce to websocket
 date: 2017-08-31 13:32:17
-tags:
+categories: ["技术"]
 ---
 
 ## 背景

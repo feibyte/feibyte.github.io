@@ -1,7 +1,7 @@
 ---
 title: "工作中的前端工程化问题"
 date: 2015-01-07
-category: 心得总结
+categories: ["技术"]
 tags: [前端工程化]
 ---
 

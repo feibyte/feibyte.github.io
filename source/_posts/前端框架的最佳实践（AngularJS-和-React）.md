@@ -1,6 +1,7 @@
 ---
 title: 前端框架的最佳实践（AngularJS 和 React）
 date: 2017-01-01 04:26:44
+categories: ["技术"]
 tags: ["框架", "react", "AngularJs"]
 ---
 

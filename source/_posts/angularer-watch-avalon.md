@@ -1,7 +1,7 @@
 ---
 title: "初看 avalon"
 date: 2015-04-23
-category: 心得总结
+categories: ["技术"]
 tags: [调研 MVVM]
 ---
 

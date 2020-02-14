@@ -1,6 +1,7 @@
 ---
 title: Eat that frog 笔记
 date: 2020-02-14 21:16:50
+categories: ["读书笔记"]
 tags: 读书笔记
 thumbnail: /gallery/thumbnails/frog.jpg
 ---

@@ -1,6 +1,7 @@
 ---
 title: HMR 踩坑记
 date: 2017-06-25 19:44:55
+categories: ["技术"]
 tags: [webpack]
 ---
 
