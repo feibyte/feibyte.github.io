@@ -1,8 +1,8 @@
 ---
 title: "前端三俗之Promise"
 date: 2014-03-29
-categories: ["技术"]
-tags: [Promise]
+categories: ["设计实现"]
+tags: ["Promise"]
 ---
 
 这篇文章很好的介绍了Promise  <http://www.html5rocks.com/zh/tutorials/es6/promises/>

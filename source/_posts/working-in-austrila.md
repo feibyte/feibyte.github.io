@@ -2,7 +2,7 @@
 title: 工作在澳洲
 date: 2019-08-03 11:17:07
 categories: ["随笔"]
-tags: 工作
+tags: ["工作生活"]
 thumbnail: /gallery/thumbnails/operahouse.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Angular启动"
 date: 2014-10-31
-categories: ["技术"]
-tags: [AngularJS]
+categories: ["实践总结"]
+tags: ["前端", AngularJS]
 ---
 
 本来有一篇很好的文章讲解启动流程，后来设为秘密的了，虽然有复制，但也不太好拿人家不愿共享的东西出来。在这就贴一下我的总结啦。

@@ -1,8 +1,8 @@
 ---
 title: 浅谈编码能力
 date: 2019-05-23 14:11:09
-categories: ["技术"]
-tags: 编码
+categories: ["技术杂谈"]
+tags: ["编码"]
 thumbnail: /gallery/thumbnails/coding.jpg
 ---
 

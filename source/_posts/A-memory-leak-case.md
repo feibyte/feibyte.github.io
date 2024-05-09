@@ -1,8 +1,8 @@
 ---
 title: 一个内存泄漏问题分析
 date: 2019-08-11 15:03:01
-categories: ["技术"]
-tags: 调试
+categories: ["实践总结"]
+tags: ["前端", "调试"]
 thumbnail: /gallery/thumbnails/memory-leak.jpg
 ---
 

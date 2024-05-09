@@ -1,9 +1,8 @@
 ---
 title: "前端模板"
 date: 2013-10-15
-categories: ["技术"]
-tags: [template]
-
+categories: ["实践总结"]
+tags: ["前端", "模板"]
 ---
 
 ### 原始的不足

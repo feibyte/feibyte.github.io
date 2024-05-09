@@ -1,8 +1,8 @@
 ---
 title: Auth0 lock issue
 date: 2020-01-17 23:11:42
-categories: ["技术"]
-tags: ["Auth0", "锁"]
+categories: ["实践总结"]
+tags: ["前端", "Auth0", "锁"]
 thumbnail: /gallery/thumbnails/mutex.png
 ---
 

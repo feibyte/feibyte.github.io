@@ -1,8 +1,8 @@
 ---
 title: 探秘 MobX
 date: 2017-03-30 21:41:22
-categories: ["技术"]
-tags: ["MobX", "框架"]
+categories: [设计实现]
+tags: [前端, MobX, 框架]
 ---
 
 [MobX](https://github.com/mobxjs/mobx) 是最近在 React 社区比较火的状态管理工具。与 Redux 相比，Mobx 简单又神秘。不止是因为 MobX 比较火，MobX 的双向绑定与 Vue 的实现也是非常相似，十分有必要去了解一下双向绑定的实现。这篇文章通过源码解释 MobX 这些奇怪的“特性”。

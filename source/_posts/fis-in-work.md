@@ -1,8 +1,8 @@
 ---
 title: "工作中的前端工程化问题"
 date: 2015-01-07
-categories: ["技术"]
-tags: [前端工程化]
+categories: [实践总结]
+tags: [前端, 工程化]
 ---
 
 > 看过张云龙在git上关于前端集成的讨论，总结下工作中的问题。去年初的时候读过，之后也思考总结过我们平时开发项目中遇到的问题。现在再重新梳理一遍，主要是组件化。[InfoQ 上的文章](http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part1/) && [github 上文章](https://github.com/fouber/blog/issues/1)

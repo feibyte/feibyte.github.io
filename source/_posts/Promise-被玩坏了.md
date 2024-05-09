@@ -1,8 +1,8 @@
 ---
 title: Promise 被玩坏了
 date: 2017-01-19 11:31:30
-categories: ["技术"]
-tags: ["Promise", "MutationObserver"]
+categories: ["实践总结"]
+tags: ["前端", "Promise", "MutationObserver"]
 ---
 
 收到产品同学反馈的一个 bug：在 iOS 上，进入首页之后很快滑动，再点击切换到第二个页面会一直处于loading状态，可以稳定复现。拿自己的手机试了几次果然可以复现。在模拟器上准备调试，打开控制台并未看到错误。于是猜想有异常没有处理，检查代码是否遗漏：

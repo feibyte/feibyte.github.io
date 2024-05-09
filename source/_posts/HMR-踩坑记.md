@@ -1,8 +1,8 @@
 ---
 title: HMR 踩坑记
 date: 2017-06-25 19:44:55
-categories: ["技术"]
-tags: [webpack]
+categories: ["实践总结"]
+tags: ["前端", "webpack"]
 ---
 
 昨天遇到一个问题：使用 next/tree 时报错，即使最简单的 Demo 也会报错，而官网提供的则不会，最终问题定位到 react-hot-loader 上。我使用的是 `react-hot-loader@next`版本，需要在 babel 配置中引入 `react-hot-loader/babel` plugin。禁用这个 plugin 正常渲染，启用就报错，这个问题太诡异了，所以有必要搞清楚 HMR。

@@ -1,8 +1,8 @@
 ---
 title: 烦人的 Flow.js
 date: 2019-06-17 12:16:09
-categories: ["技术"]
-tags: 编程语言
+categories: ["实践总结"]
+tags: ["前端", "编程语言", "Flow.js"]
 thumbnail: /gallery/thumbnails/flowjs.png
 ---
 

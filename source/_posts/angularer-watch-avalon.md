@@ -1,8 +1,8 @@
 ---
 title: "初看 avalon"
 date: 2015-04-23
-categories: ["技术"]
-tags: [调研 MVVM]
+categories: [实践总结]
+tags: [MVVM, 前端]
 ---
 
 > 因为需要考虑兼容低版本浏览器，想选择一个更为合适的MVVM框架，需要调研下 avalon，从一个 angular 使用者角度看 avalon（有排斥心理）。

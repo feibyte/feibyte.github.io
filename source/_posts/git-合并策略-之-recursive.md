@@ -1,8 +1,8 @@
 ---
 title: git 合并策略 之 recursive
 date: 2017-02-22 11:52:04
-categories: ["技术"]
-tags: git
+categories: ["实践总结"]
+tags: ["工具", "git"]
 ---
 前几天老婆大人考察：git merge 时什么情况下进行 auto merge 以及如何 merge ? 我只能回答：如果文件同一行都有修改就会冲突，如果没有冲突就会自动 merge 。另一个问题是：如果一个文件删除了，为什么 merge 时还存在？这个应该是在另一个分支上对该文件做了修改。在阅读后面的文章之前，假定你理解 git 的分支是由 commit 串起来的一条链。如果不明白上一句话，请先补下 [git 分支](http://git.oschina.net/progit/3-Git-%E5%88%86%E6%94%AF.html#3.2-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6) 知识点。
 
