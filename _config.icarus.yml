@@ -12,10 +12,10 @@ head:
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
         # Name of the web application (default to the site title)
-        name: 
+        name: Fedeoo's Blog
         # The displayed name of the web application
         # when there is not enough space to display full name
-        short_name: 
+        short_name: Fedeoo's Blog
         # The start URL of the web application
         start_url: 
         # The default theme color for the application
@@ -98,7 +98,7 @@ head:
     meta:
         # Meta tag specified in <attribute>=<value> style
         # E.g., name=theme-color;content=#123456 => <meta name="theme-color" content="#123456">
-        - ''
+        - name=google-site-verification;content=aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU
     # URL or path to the website's RSS atom.xml
     rss: 
 # Page top navigation bar configurations
@@ -300,7 +300,7 @@ plugins:
     # https://analytics.google.com
     google_analytics:
         # Google Analytics tracking ID
-        tracking_id: 
+        tracking_id: G-773NDPTQE0
     # Hotjar user feedback plugin
     # https://www.hotjar.com/
     hotjar:

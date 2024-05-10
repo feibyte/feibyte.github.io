@@ -61,5 +61,5 @@ ignore: null
 theme: icarus
 deploy:
   type: git
-  repo: https://github.com/fedeoo/fedeoo.github.io
+  repo: https://github.com/feibyte/feibyte.github.io
   branch: gh-pages
