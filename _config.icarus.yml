@@ -29,11 +29,11 @@ head:
         icons:
             -
                 # The path to the image file
-                src: ''
+                src: '/gallery/site/shark.png'
                 # A string containing space-separated image dimensions
                 sizes: ''
                 # A hint as to the media type of the image
-                type: 
+                type: png
     # Open Graph metadata
     # https://hexo.io/docs/helpers.html#open-graph
     open_graph:
@@ -114,7 +114,7 @@ navbar:
     links:
         Download on GitHub:
             icon: fab fa-github
-            url: https://github.com/ppoffice/hexo-theme-icarus
+            url: https://github.com/feibyte/feibyte.github.io
 # Page footer configurations
 # footer:
     # Copyright text
@@ -129,7 +129,7 @@ navbar:
 #             url: https://creativecommons.org/licenses/by/4.0/
 #         Download on GitHub:
 #             icon: fab fa-github
-#             url: https://github.com/ppoffice/hexo-theme-icarus
+#             url: https://github.com/feibyte/feibyte.github.io
 # Article related configurations
 article:
     # Code highlight settings
@@ -164,10 +164,10 @@ search:
     index_pages: true
 # # Comment plugin configurations
 # # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Comment/
-# comment:
-#     type: disqus
-#     # Disqus shortname
-#     shortname: ''
+comment:
+    type: disqus
+    # Disqus shortname
+    shortname: 'blog-feibyte-com'
 # Sidebar configurations.
 # Please be noted that a sidebar is only visible when it has at least one widget
 sidebar:
