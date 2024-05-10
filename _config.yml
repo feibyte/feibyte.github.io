@@ -1,11 +1,11 @@
-title: Hexo
-subtitle: ''
-description: ''
+title: Fedeoo's Blog
+subtitle: 'Feibyte 的技术博客'
+description: '博客主要记录工作上的实践总结和技术思考'
 keywords: null
-author: John Doe
+author: Fedeoo
 language: en
 timezone: ''
-url: http://example.com
+url: http://blog.feibyte.com
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:
@@ -59,6 +59,8 @@ include: null
 exclude: null
 ignore: null
 theme: icarus
+sitemap:
+  path: sitemap.xml
 deploy:
   type: git
   repo: https://github.com/feibyte/feibyte.github.io
