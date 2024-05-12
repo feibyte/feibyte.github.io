@@ -7,6 +7,8 @@ thumbnail: /gallery/thumbnails/intellij.png
 ---
 目前所在公司使用的是 Serviceless 架构，数据库使用 DynamoDB，每天定时任务会导入数据湖，所以平时会经常使用 Athena 查询来排查问题，尤其是最近在调查数据一致性的问题。Athena 本身可以满足日常需求，只是使用多的时候觉得不如 IDE 方便。
 
+<!-- more -->
+
 ## 问题
 
 当前使用的是 IntelliJ IDEA （已经更新到最新版），直接选择 Database 添加 Data Source 选择 AWS Athena 看到的是下面这个界面，授权方式有三种： User & Password，AWS Profile， No auth。 我们使用的是 SSO 应该选择 No auth 之后切换到 Advanced 参数就不知道怎么设置了
