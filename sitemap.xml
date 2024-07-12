@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-part-two/</loc>
+    <loc>http://blog.feibyte.com/2024/06/07/Designing-data-intensive-applications-note/</loc>
     
     <lastmod>2024-07-12</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2024/06/07/Designing-data-intensive-applications-note/</loc>
+    <loc>http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-part-two/</loc>
     
-    <lastmod>2024-06-20</lastmod>
+    <lastmod>2024-07-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2015/05/14/obsolete/talk-about-component/</loc>
+    <loc>http://blog.feibyte.com/2014/03/29/obsolete/promise/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2014/03/29/obsolete/promise/</loc>
+    <loc>http://blog.feibyte.com/2015/05/14/obsolete/talk-about-component/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -164,6 +164,15 @@
   </url>
   
   <url>
+    <loc>http://blog.feibyte.com/2017/01/19/obsolete/Promise-%E8%A2%AB%E7%8E%A9%E5%9D%8F%E4%BA%86/</loc>
+    
+    <lastmod>2024-05-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.feibyte.com/2014/02/13/obsolete/about-js-module/</loc>
     
     <lastmod>2024-05-16</lastmod>
@@ -182,15 +191,6 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2017/01/19/obsolete/Promise-%E8%A2%AB%E7%8E%A9%E5%9D%8F%E4%BA%86/</loc>
-    
-    <lastmod>2024-05-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.feibyte.com/2015/04/23/obsolete/angularer-watch-avalon/</loc>
     
     <lastmod>2024-05-16</lastmod>
@@ -200,7 +200,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2019/06/17/obsolete/annoying-flowjs/</loc>
+    <loc>http://blog.feibyte.com/2014/10/31/obsolete/angularjs-bootstrap/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2014/10/31/obsolete/angularjs-bootstrap/</loc>
+    <loc>http://blog.feibyte.com/2019/06/17/obsolete/annoying-flowjs/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -245,7 +245,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2017/01/01/novice/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%88AngularJS-%E5%92%8C-React%EF%BC%89/</loc>
+    <loc>http://blog.feibyte.com/2017/01/02/novice/%E5%89%8D%E7%AB%AF%E5%85%AC%E5%85%B1%E8%B5%84%E6%BA%90%E5%AE%8C%E5%85%A8%E5%85%B1%E4%BA%AB%E7%9A%84%E7%95%85%E6%83%B3/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2017/01/02/novice/%E5%89%8D%E7%AB%AF%E5%85%AC%E5%85%B1%E8%B5%84%E6%BA%90%E5%AE%8C%E5%85%A8%E5%85%B1%E4%BA%AB%E7%9A%84%E7%95%85%E6%83%B3/</loc>
+    <loc>http://blog.feibyte.com/2017/01/01/novice/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%88AngularJS-%E5%92%8C-React%EF%BC%89/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -371,7 +371,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2020/06/07/journeyman/%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85-%E6%9C%80%E7%AE%80%E8%A7%A3%E9%87%8A%E5%99%A8%E5%AE%9E%E7%8E%B0/</loc>
+    <loc>http://blog.feibyte.com/2020/04/10/journeyman/%E3%80%8A%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85%E3%80%8B%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -380,7 +380,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2020/04/10/journeyman/%E3%80%8A%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85%E3%80%8B%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://blog.feibyte.com/2020/06/07/journeyman/%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85-%E6%9C%80%E7%AE%80%E8%A7%A3%E9%87%8A%E5%99%A8%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -407,7 +407,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2020/02/18/journeyman/The-Wealth-of-Nations-Part-1/</loc>
+    <loc>http://blog.feibyte.com/2015/01/07/journeyman/fis-in-work/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -416,7 +416,7 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/2015/01/07/journeyman/fis-in-work/</loc>
+    <loc>http://blog.feibyte.com/2020/02/18/journeyman/The-Wealth-of-Nations-Part-1/</loc>
     
     <lastmod>2024-05-16</lastmod>
     
@@ -464,6 +464,13 @@
   </url>
   
   <url>
+    <loc>http://blog.feibyte.com/tags/Amazon-connect/</loc>
+    <lastmod>2024-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.feibyte.com/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -478,13 +485,6 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/SQS-Processor/</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.feibyte.com/tags/DynamoDB/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -492,14 +492,14 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/%E5%B7%A5%E4%BD%9C%E7%94%9F%E6%B4%BB/</loc>
+    <loc>http://blog.feibyte.com/tags/SQS-Processor/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/Amazon-connect/</loc>
+    <loc>http://blog.feibyte.com/tags/%E5%B7%A5%E4%BD%9C%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -534,14 +534,14 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/CS/</loc>
+    <loc>http://blog.feibyte.com/tags/%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/%E6%9E%B6%E6%9E%84/</loc>
+    <loc>http://blog.feibyte.com/tags/CS/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -555,14 +555,14 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/</loc>
+    <loc>http://blog.feibyte.com/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/</loc>
+    <loc>http://blog.feibyte.com/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -625,6 +625,20 @@
   </url>
   
   <url>
+    <loc>http://blog.feibyte.com/tags/Promise/</loc>
+    <lastmod>2024-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.feibyte.com/tags/MutationObserver/</loc>
+    <lastmod>2024-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.feibyte.com/tags/Module/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -646,21 +660,14 @@
   </url>
   
   <url>
-    <loc>http://blog.feibyte.com/tags/Promise/</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.feibyte.com/tags/MutationObserver/</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.feibyte.com/tags/MVVM/</loc>
+    <lastmod>2024-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.feibyte.com/tags/AngularJS/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -675,13 +682,6 @@
   
   <url>
     <loc>http://blog.feibyte.com/tags/Flow-js/</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.feibyte.com/tags/AngularJS/</loc>
     <lastmod>2024-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
