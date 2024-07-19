@@ -1,6 +1,6 @@
 ---
-title: 《Designing Data Intensive Applications》读书笔记
-date: 2024-06-07 23:17:22
+title: 《Designing Data Intensive Applications》读书笔记 - 事务
+date: 2024-06-10 23:17:22
 categories: [学习笔记]
 tags: [DataBase]
 thumbnail: /gallery/thumbnails/2024/designing-data-intensive-applications-book.png
