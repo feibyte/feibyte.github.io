@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><meta name="msvalidate.01" content="2CB4988EF2694D3ED16C6614D070E697"><title>机器学习笔记 - Fedeoo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="在读吴军的《智能时代》和《数学之美》时常常被技术的力量给震撼到，尤其是其中现实的例子特别具有说服力，未来的发展或许由人工智能驱动。当然在深度方面，自学肯定不如专科博士生，不过未来人工智能或许就像现在的编程一样成为一种基础工具。今年的计划之一就是学习人工智能，因为离开学习太久，学习理论的东西不如从前。这一篇指南 如何用3个月零基础入门「机器学习」 提供的建议非常受用。目前在看 吴恩达的 《机器学习》"><meta property="og:type" content="blog"><meta property="og:title" content="机器学习笔记"><meta property="og:url" content="http://blog.feibyte.com/2020/08/02/journeyman/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="在读吴军的《智能时代》和《数学之美》时常常被技术的力量给震撼到，尤其是其中现实的例子特别具有说服力，未来的发展或许由人工智能驱动。当然在深度方面，自学肯定不如专科博士生，不过未来人工智能或许就像现在的编程一样成为一种基础工具。今年的计划之一就是学习人工智能，因为离开学习太久，学习理论的东西不如从前。这一篇指南 如何用3个月零基础入门「机器学习」 提供的建议非常受用。目前在看 吴恩达的 《机器学习》"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://blog.feibyte.com/gallery/thumbnails/machine-learning.png"><meta property="article:published_time" content="2020-08-02T07:28:59.000Z"><meta property="article:modified_time" content="2025-12-03T09:25:38.752Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="学习笔记"><meta property="article:tag" content="机器学习"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://blog.feibyte.com/gallery/thumbnails/machine-learning.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.feibyte.com/2020/08/02/journeyman/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"},"headline":"机器学习笔记","image":["http://blog.feibyte.com/gallery/thumbnails/machine-learning.png"],"datePublished":"2020-08-02T07:28:59.000Z","dateModified":"2025-12-03T09:25:38.752Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"http://blog.feibyte.com/gallery/site/logo.png"}},"description":"在读吴军的《智能时代》和《数学之美》时常常被技术的力量给震撼到，尤其是其中现实的例子特别具有说服力，未来的发展或许由人工智能驱动。当然在深度方面，自学肯定不如专科博士生，不过未来人工智能或许就像现在的编程一样成为一种基础工具。今年的计划之一就是学习人工智能，因为离开学习太久，学习理论的东西不如从前。这一篇指南 如何用3个月零基础入门「机器学习」 提供的建议非常受用。目前在看 吴恩达的 《机器学习》"}</script><link rel="canonical" href="http://blog.feibyte.com/2020/08/02/journeyman/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="English" href="https://blog.feibyte.com/en">English</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-02T07:28:59.000Z" title="02/08/2020, 5:28:59 pm">2020-08-02</time>发表</span><span class="level-item"><time dateTime="2025-12-03T09:25:38.752Z" title="03/12/2025, 8:25:38 pm">2025-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">34 分钟读完 (大约5108个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">机器学习笔记</h1><div class="content"><p>在读吴军的《智能时代》和《数学之美》时常常被技术的力量给震撼到，尤其是其中现实的例子特别具有说服力，未来的发展或许由人工智能驱动。当然在深度方面，自学肯定不如专科博士生，不过未来人工智能或许就像现在的编程一样成为一种基础工具。今年的计划之一就是学习人工智能，因为离开学习太久，学习理论的东西不如从前。这一篇指南 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29704017">如何用3个月零基础入门「机器学习」</a> 提供的建议非常受用。目前在看 吴恩达的 《机器学习》视频，已完成监督学习部分，这儿做一个阶段性复习。</p>
+<span id="more"></span>
+<p>这个视频所涉及到的理论知识很少，不过跟着练习做完也发现已经可以解决很多问题了。首先是机器学习分为监督学习和非监督学习。监督学习就是已知训练数据集的结果，对未来的一些数据进行预测，比如数字识别，邮件分类，房价预测。非监督学习就是我们不知道结果，比如推荐系统中发现同时购买的商品。</p>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="单一特征参数"><a href="#单一特征参数" class="headerlink" title="单一特征参数"></a>单一特征参数</h3><p>线性回归大家应该都已经使用过，记得大学做物理实验的时候需要根据收集到的数据找到实验变量直接的线性关系，实验中的数据处理很多用的就是最小二乘法。假设收集到的数据已经打点在坐标系上，要求的一元线性回归方程形如 <code>y = ax + b</code>，我们需要保证这个直线离所有的点尽可能的近。</p>
+<p>这个课程给的例子是已知房屋面积和价格的一组数据，我们需要找到它们之间的关系以便我们预测房价。我们可以把假设函数定义为</p>
+<p>$$h_\theta(x) &#x3D; \theta_0 + \theta_1x$$</p>
+<p>为了评估我们的函数模型，我们引入损失函数（Cost Function）（其中的 $\hat{y_i}$ 是预测值）：</p>
+<p>$$J(\theta_0, \theta_1)&#x3D;\frac{1}{2m}\sum_{i &#x3D; 1}^{n}(\hat{y_i} - y_i)^2 &#x3D; \frac{1}{2m}\sum_{i &#x3D; 1}^{n}(h_θ(x_i) - y_i)^2$$</p>
+<p>我们希望这个损失函数结果越小越好（最小二乘法），也就是求它的最小值。我们可以先回顾一下一元函数的极值求法，之前讲求根运算时介绍过<a target="_blank" rel="noopener" href="https://fedeoo.github.io/math-for-programmers/chapter1/sqrt.html">牛顿迭代法</a>，我们的递归式</p>
+<p>$$x_{n+1} &#x3D; x_n - \frac{f(x_n)}{f’(x_n)}$$</p>
+<p>图形化的解释：</p>
+<p><img src="/gallery/site/newton-method.png" alt="牛顿迭代法"> </p>
+<p>初始迭代的点为 $x_0$，之后根据斜率和 $f(x_0)$ 计算第二个点 $x_1$，一直到斜率趋于 0。斜率的正负决定了收敛方向，斜率的大小决定了收敛的速度。再来看下梯度下降，简单来说我们只需要将 $f(x_0)$ 替换为一个常量 $\alpha$ 比如 0.03。 比较而言，牛顿法具有很好的收敛性，而梯度下降要简单一些。下面是使用梯度下降找到极值的直观例子，就像沿着山坡最陡峭的方向往下走。</p>
+<p><img src="/gallery/site/gradient-descent.png" alt="梯度下降"></p>
+<p>从图上可以看出，我们求得的极值是局部最优可能不是全局最优的，这跟我们的初始值有关，不过这个不是问题。多元函数使用的是偏导，对于上面的损失函数，我们的递归式就是形如：</p>
+<p>$$\theta_0 :&#x3D; \theta_0 - \alpha \frac{\partial }{\partial \theta_0}J(\theta_0, \theta_1) \\<br>\theta_1 :&#x3D; \theta_1 - \alpha \frac{\partial }{\partial \theta_1}J(\theta_1, \theta_1)$$</p>
+<p>一直迭代下去直到偏导趋于 0，因为极值点偏导为 0。其中 $\alpha$ 的选择不能太大，太大可能导致无法收敛，太小的话迭代次数较多。注意上面的计算需要同时计算，对比下上面牛顿法的迭代式，左侧的 $\theta_0$ 和 $\theta_1$ 是第 $n + 1$ 的 $\theta$ 而 $\theta_0$ 和 $\theta_1$ 是第 n 次的 $\theta$。</p>
+<p>接下来就是求偏导了:</p>
+<p>$$\begin{aligned}<br>\frac{\partial }{\partial \theta_j}J(\theta_0, \theta_1) &amp;&#x3D; \frac{\partial }{\partial \theta_j}\frac{1}{2}(h_θ(x_i) - y_i)^2 \\<br>  &amp;&#x3D; (h_θ(x_i) - y_i)\frac{\partial }{\partial \theta_j}(h_θ(x_i) - y_i) \\<br>  &amp;&#x3D; (h_θ(x_i) - y_i)\frac{\partial }{\partial \theta_j}h_θ(x_i)<br>\end{aligned}$$</p>
+<p>对于 $\frac{\partial }{\partial \theta_j}h_θ(x_i)$，当 $\theta_j$ 为 $\theta_0$ 时值为 1，当 $\theta_j$ 为 $\theta_1$ 时值为 x。</p>
+<h3 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h3><p>上面的例子只有一个特征参数，实际当中的特征参数会有很多，这儿就扩展一下。</p>
+<p>$$h_\theta(x) &#x3D; \theta_0x_0 + \theta_1x_1 + \theta_2x_2 + \theta_3x_3 + … + \theta_nx_n$$</p>
+<p>其中 $x_0$ 始终为 1。我们又可以将上面的假设函数写成向量的形式：</p>
+<p>$$h_\theta(x) &#x3D; \left [ \begin{matrix} \theta_0 \\<br> \theta_1 \\ \theta_2 \\ … \\ \theta_n \end{matrix} \right ]<br>\left [ \begin{matrix} x_0 &amp; x_1 &amp; x_2 &amp; … &amp; x_n \end{matrix} \right ] &#x3D; \theta^TX$$</p>
+<p>损失函数为：</p>
+<p>$$J(\theta) &#x3D; \frac{1}{2m}\sum_{i &#x3D; 1}^{m}(h_θ(x^{(i)}) - y^{(i)})^2 &#x3D; \frac{1}{2m}\sum_{i &#x3D; 1}^{m}(\theta^Tx^{(i)} - y^{(i)})^2$$</p>
+<p>其中 $x^{(i)}$ 和 $y^{(i)}$ 对应第 i 组数据。</p>
+<p>偏导  </p>
+<p>$$\frac{\partial }{\partial \theta_j}J(\theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}(\theta^Tx^{(i)} - y^{(i)})x_{j}^{(i)}$$</p>
+<p>上面的假设只是多元一次函数，其实假设函数式可以为任意多项式形式。以上面例子，我们可以把 $x_1^2$ 当成一个新的特征 $x_2$来看待。</p>
+<p>$$h_\theta(x) &#x3D; \theta_0x_0 + \theta_1x_1 + \theta_2x_1^2 + … + \theta_nx_n$$</p>
+<h3 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h3><p>上面房价的例子中，房屋的面积范围是 100 - 1000 这取决于实际数据，而我们通常选择的步长参数 $\alpha$ 是比较小的一个数。这种情况下为了减少迭代次数，我们可以把已有的数据映射到 [-1, 1] 这个范围内。 </p>
+<p>$$x_i :&#x3D; \frac{x_i - u_i}{s_i}$$ </p>
+<p>其中 $u_i$ 为第 i 个特征的平均值，$s_i$ 为第 i 个特征的范围。</p>
+<h3 id="Normal-equation"><a href="#Normal-equation" class="headerlink" title="Normal equation"></a>Normal equation</h3><p>梯度下降是求解 $\theta$ 的一种方式，我们要求解的 $\theta$ 满足 </p>
+<p>$$X\theta &#x3D; y$$</p>
+<p>我们可以用 求解线性方程的方式求得 $\theta$，因为 $X$ 不一定是方阵，我们需要两边同时先乘以 $X^T$</p>
+<p>$$X^TX\theta &#x3D; X^Ty$$</p>
+<p>然后两边同时乘以 $X^TX$ 的逆矩阵，有</p>
+<p>$$\theta &#x3D; (X^TX)^{-1}X^Ty$$</p>
+<p>如果特征矩阵不可逆，可能是存在冗余特征或者是样本太少特征太多。</p>
+<p>矩阵求逆的时间复杂度为 $O(n^3)$ 在特征数比较少（比如小于 1000）的时候比较有优势。</p>
+<p>上面这些就是线性回归的内容，现在就可以使用它解决房价预测的问题了。</p>
+<h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><p>还有一个常见问题是分类问题，比如判断肿瘤是恶性还是良性，垃圾邮件分类。这类问题明显不能使用线性回归解决，假设函数 $h_\theta(x)&#x3D;\theta^TX$ 结果可以是任意值，而实际值 y 只可能为 0 或 1。所以，我们必须确保假设函数 $h_\theta(x)$ 满足 $0 \leq h_\theta(x) \leq 1$。我们引入 Sigmoid 函数 </p>
+<p>$$g(z) &#x3D; \frac{1}{1 + e^{-z}}$$</p>
+<p><img src="/gallery/site/ml/sigmoid.png" alt="Sigmoid"></p>
+<p>假设函数为 </p>
+<p>$$h_\theta(x)&#x3D;g(\theta^TX)$$</p>
+<p>假设函数表示的意义是 y &#x3D; 1 的可能性。可以表示为</p>
+<p>$$h_\theta(x) &#x3D; P(y &#x3D; 1|x;\theta) &#x3D; 1 - P(y &#x3D; 0|x;\theta)$$</p>
+<p>一般来说，当 $h_\theta(x) \geq 0.5$ 时 y 为 1，当 $h_\theta(x) &lt; 0.5$ 时 y 为 0。也就是当 $\theta^TX \geq 0$ 时 y 为 1，当 $\theta^TX &lt; 0$ 时 y 为 0。如图所示，在我们对样本分类时，其实就是在找到一条线，将其划分为两部分，在直线下方的小于 0，在直线上方的 大于 0 。当然上面也已经提到过，我们的假设函数可以是任意多项式的函数，不一定是一条直线。</p>
+<p><img src="/gallery/site/ml/decision-boundary.png" alt="Sigmoid"></p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>这儿不能使用线性规划的损失函数，因为得到的不是凸函数。下面是我们的损失函数<br>$$J(\theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}Cost(h_θ(x^{(i)}), y^{(i)})$$<br>其中当 y &#x3D; 0 时 $Cost(h_\theta(x), y) &#x3D; -log(1 - h_\theta(x))$；当 y  &#x3D; 1 时，$Cost(h_\theta(x), y) &#x3D; -log(h_\theta(x))$。损失函数的效果是当实际值 y 与 计算值相同时，损失为 0，如果相反则趋于无穷大。因为 y 要么为 0 要么为 1，损失函数也可以写成<br>$$Cost(h_\theta(x), y) &#x3D; -ylog(h_\theta(x)) - (1 - y)log(1 - h_\theta(x))$$ </p>
+<p>完整的损失函数为 </p>
+<p>$$J(\theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}\left [ -y^{(i)}log(h_\theta(x^{(i)})) - (1 - y^{(i)})log(1 - h_\theta(x^{(i)})) \right ]$$</p>
+<p>对应的偏导</p>
+<p>$$\frac{\partial }{\partial \theta_j}J(\theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}(h_\theta(x^{(i)}) - y^{(i)})x_{j}^{(i)}$$</p>
+<p>看上去和线性回归的很相似，这儿不再证明。</p>
+<p>最后，如果目标分类大于 2 种，我们只需要每次分出一种，把其它的看作一类即可。</p>
+<h2 id="正则化和过拟合问题"><a href="#正则化和过拟合问题" class="headerlink" title="正则化和过拟合问题"></a>正则化和过拟合问题</h2><p>假设我们有一组数据，数据的分布如图所示，我们可以大概看出它应该是一条曲线，左侧的图表示我们在用直线来拟合这个函数，可以看出不太合适，我们称之为欠拟合。同样的道理，右侧我们使用的是一个高阶的函数来拟合，虽然曲线穿过了所有的点，但是我们知道这样的函数不具有普适性，我们称之为过拟合。</p>
+<p><img src="/gallery/site/ml/overfitting.png" alt="Overfitting"></p>
+<p>对于过拟合来说，除了减少参数，还可以使用正则化的方式。简单来说就是，我们希望保留一些特征参数，但是又不希望它的权重太重。我们在损失函数中加入惩罚项，注意我们并不惩罚 $\theta_0$ 所以， j 是从 1 开始的。</p>
+<p>$$J(\theta) &#x3D; \frac{1}{2m}\sum_{i &#x3D; 1}^{m}(h_θ(x^{(i)}) - y^{(i)})^2 + \lambda \sum_{j &#x3D; 1}^{n}\theta_j^2$$</p>
+<p>总之，我们需要求得损失函数的最小值，所以不难理解当 $\lambda$ 比较大时，$\theta$ 会非常而趋于 0。</p>
+<p>正则化的线性回归递归式（当然 $\theta_0$ 不变）</p>
+<p>$$\theta_j :&#x3D; \theta_j(1 - \alpha\frac{\lambda}{m}) - \alpha\frac{1}{m}\sum_{i &#x3D; 1}^{m}(h_θ(x^{(i)}) - y^{(i)})x_j^{(i)}$$</p>
+<p>对于 Normal Equation 来说，变为</p>
+<p>$$\theta &#x3D; (X^TX + \lambda \cdot L)^{-1}X^Ty$$</p>
+<p>其中 L 类似单位矩阵，只不过第一个位置的元素为 0 。</p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="神经网络的表示"><a href="#神经网络的表示" class="headerlink" title="神经网络的表示"></a>神经网络的表示</h3><p>神经网络的模型非常直观，一般的表示为：</p>
+<p><img src="/gallery/site/ml/neural-network.png" alt="Neural network"></p>
+<p>Layer 1 是输入层，Layer3 是输出层，中间的是隐藏层。 隐藏层节点又称为激活单元，第 j 层的 i 个单元记为 $a_i^{(j)}$。$Θ^{(j)}$ 表示第 j  层到 j + 1 层的映射矩阵。对于上图中的节点有：<br>$$\begin{aligned}<br>a_1^{(2)} &amp;&#x3D; g(\Theta_{10}^{(1)} x_0 + \Theta_{11}^{(1)} x_1) + \Theta_{12}^{(1)} x_2 + \Theta_{13}^{(1)} x_3) \\<br>a_2^{(2)} &amp;&#x3D; g(\Theta_{20}^{(1)} x_0 + \Theta_{21}^{(1)} x_1) + \Theta_{22}^{(1)} x_2 + \Theta_{23}^{(1)} x_3) \\<br>a_3^{(2)} &amp;&#x3D; g(\Theta_{30}^{(1)} x_0 + \Theta_{31}^{(1)} x_1) + \Theta_{32}^{(1)} x_2 + \Theta_{33}^{(1)} x_3) \\<br>h_{\Theta}(x) &#x3D; a_1^{(3)} &amp;&#x3D; g(\Theta_{10}^{(2)} a_0^{(2)} + \Theta_{11}^{(2)} a_1^{(2)}) + \Theta_{12}^{(2)} a_2^{(2)} + \Theta_{13}^{(1)} a_3^{(2)})<br>\end{aligned}$$</p>
+<p>上式中在每一层都会加入第 0 项。更一般化的等式可以写成</p>
+<p>$$z^{(j)} &#x3D; \Theta^{(j-1)}a^{(j-1)}$$<br>$$a^{(j)} &#x3D; g(z^{(j)})$$</p>
+<p>整个来看，如果没有隐藏层的话和之前接触的模型并无不同，更多层模型可以应对更为复杂的模型。具体的应用例子是以逻辑 XNOR 为例</p>
+<p><img src="/gallery/site/ml/xnor.png" alt="XNOR"></p>
+<p>可以看出如果没有隐藏节点的话，是不能直接实现想要的逻辑功能的，更多的隐藏层和隐藏节点意味着更为复杂的模型函数。现在，还是比较容易理解隐藏节点的增加可以使模型更能够拟合现实数据。剩下的问题就是如何确定这些隐藏节点的参数。</p>
+<h3 id="后向传播"><a href="#后向传播" class="headerlink" title="后向传播"></a>后向传播</h3><p>首先需要定义损失函数 Cost Function，我们约定网络总层数为 L，$s_l$ 为第 l 层的节点数目，K 为输出节点数目。因为神经网络的输出可能有多个节点，$h_{\Theta}(x)_k$ 为第 k 个输出的假设函数。回忆下逻辑回归的损失函数为 </p>
+<p>$$J(\theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}\left [ -y^{(i)}log(h_\theta(x^{(i)})) - (1 - y^{(i)})log(1 - h_\theta(x^{(i)})) \right ] + \frac{\lambda}{2m}\sum_{j &#x3D; 1}^{n}\theta_j^2$$</p>
+<p>神经网络对应的损失函数略微复杂，只是因为输出节点可能为多个，另外需要将所有的参数都加入惩罚项：</p>
+<p>$$J(\Theta) &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{m}\sum_{k &#x3D; 1}^{K}\left [ -y_k^{(i)}log(h_{\Theta}(x^{(i)})(k)) - (1 - y_k^{(i)})log(1 - h_{\Theta}(x^{(i)}(k))) \right ] + \frac{\lambda}{2m}\sum_{l&#x3D;1}^{L-1}\sum_{i&#x3D;1}^{s_l}\sum_{j &#x3D; 1}^{s_{l+1}}(\Theta_{j,i}^{(l)})^2$$<br>同样的，我们的目的也是求其最小值。过程时这样的：<br>给定训练集 ${(x^{(1)}, y^{(1)})\cdot \cdot \cdot (x^{(m)}, y^{(m)})}$<br>初始化 $\Delta_{i,j}^{l} :&#x3D; 0$<br>对每个训练数据 t 从 1 到 m：</p>
+<ol>
+<li>令 $a^{(1)} :&#x3D; x^{(t)}$</li>
+<li>使用前向传播计算 $a^{(l)}$ l &#x3D; 2,3,…,L</li>
+<li>使用 $y^{(i)}$ 计算 $\delta^{L} &#x3D; a^{(L)} - y^{(L)}$</li>
+<li>计算 $\delta^{(L - 1)},\delta^{(L - 2)},….,\delta^{(2)}$</li>
+<li>$\Delta_{i,j}^{l} :&#x3D; \Delta_{i,j}^{l} + a_j^{(l)}\delta_i^{(l + 1)}$</li>
+</ol>
+<p>最后再更新 $\Delta$ 矩阵<br>$D_{i,j}^{(l)} :&#x3D; \frac{1}{m}(\Delta_{i,j}^{l} + \lambda\Theta_{i,j}^{(l)})$ 当 j !&#x3D; 0<br>$D_{i,j}^{(l)} :&#x3D; \frac{1}{m}\Delta_{i,j}^{l}$ 当 j &#x3D; 0</p>
+<p>反向传播公式有：<br>$\delta^{L} &#x3D; a^{(L)} - y^{(L)}$<br>$\delta^{l} &#x3D; (\Theta^{(l)})^T\delta^{(l + 1)} .* {g}’(z^{(l)})$</p>
+<p>神经网络有点黑盒的感觉，上面的公式推导并不是太难。为什么这样子可行，不是太容易理解。从之前的例子来看就是更多的节点构建的模型可以更复杂，更容易拟合数据。</p>
+<h2 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h2><p>支持向量机要从逻辑回归说起，对于单项的损失而言，下图中上面是单项的损失函数，下面是对应的函数曲线。</p>
+<p><img src="/gallery/site/ml/logistic-cost.png" alt="逻辑回归损失"></p>
+<p>直观上看就是我们使用曲线下面的直接来替换原来的函数，我们令</p>
+<p>$$\begin{aligned}<br>cost_1(\theta^Tx^{(i)}) &#x3D; max(0, K(1 - z))<br>cost_0(\theta^Tx^{(i)}) &#x3D; max(0, K(1 + z))<br>\end{aligned}$$</p>
+<p>然后用 $cost_1(\theta^Tx^{(i)})$ 和 $cost_0(\theta^Tx^{(i)})$ 分别替换 $(-logh_{\theta}(x^{(i)})$ 和 $(-log(1 - h_{\theta}(x^{(i)}))$ 得到新的损失函数</p>
+<p>$$J(\theta) &#x3D; C\frac{1}{m}\sum_{i &#x3D; 1}^{m}\left [ y^{(i)}cost_1(\theta^Tx^{(i)}) + (1 - y^{(i)})cost_0(\theta^Tx^{(i)}) \right ] + \frac{1}{2}\sum_{i &#x3D; 1}^{n}\theta_j^2$$</p>
+<p>这儿的 C 和 $\lambda$ 一样，可以看出当 C 值比较大时，为了取得最小值，损失函数必须为 0， 也就是说当 y 为 1 时，$\theta^Tx^{(i)} &gt;&#x3D; 1$，当 y 为 0 时，$\theta^Tx^{(i)} &lt;&#x3D; -1$</p>
+<p>SVM 又称为大间隔分类器，因为当 C 比较大的时候，决策边界离正负样本的距离都比较远。它的数学原理是这样子的：$\theta^T &gt;&#x3D; 1$ 也就是向量的内积，因为惩罚参数项当 $\theta$ 值变得越来越小时，为了使内积满足 $\theta^Tx^{(i) &gt;&#x3D; 1$，根据 $\theta^T \dot x^{(i) &#x3D; \left | \theta \right | \left | x^{(i)} \right | cos\alpha$ 夹角必须尽可能的小， 也就是必须使得 $\theta$ 尽可能的与数据集尽量在同一方向，表现出来的就是与决策边界正交。</p>
+<h3 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h3><p>对于非线性分界线的情况，比如只有两个特征 $x_1$ 和 $x_2$, 我们可以扩展我们的特征，假设函数可能是 </p>
+<p>$\theta_0 + \theta_1 x_1+ \theta_2 x_2 + \theta_3 x_1x_2 + \theta_4 x_1^2 + \theta_5 x_2^2 + … &gt; 0$</p>
+<p>我们可以根据给定的 x 和 地标  $l^{(1)} l^{(2)} l^{(3)}$ 计算出新的特征 f  </p>
+<p>$f_1 &#x3D; similarity(x, l^{(1)}) &#x3D; exp(-\frac{\left | x - l^{(1)} \right |^2}{2\sigma ^2})$</p>
+<p>这个相似度函数又叫高斯核函数，在 x 与 $l^{(1)}$ 比较接近时取得 1，较远时为 0。</p>
+<p>而 $l^{(1)} l^{(2)} l^{(3)}$  的选择则是 $l^{(1)}&#x3D;x^{(1)}； l^{(2)}&#x3D;x^{(2)}； l^{(3)}&#x3D;x^{(3)}$。感觉上将原来的 n 维的 $x^{(i)}$扩展为 m 维的 $f^{(i)}$。在模型训练中的成本函数也就变为</p>
+<p>$$J(\theta) &#x3D; C\frac{1}{m}\sum_{i &#x3D; 1}^{m}\left [ y^{(i)}cost_1(\theta^Tf^{(i)}) + (1 - y^{(i)})cost_0(\theta^Tf^{(i)}) \right ] + \frac{1}{2}\sum_{i &#x3D; 1}^{m}\theta_j^2$$</p>
+<p>SVM 参数选择</p>
+<p>Large C: Lower bias high variance 训练数据偏差更小，可能过拟合。<br>Small C: Higher bias low variance</p>
+<p>Large $\sigma^2$ $f_i$ 变化更缓慢，Higer bias low variance<br>Small  $\sigma^2$ $f_i$ 更陡峭， Lower bias high variance 意味着只有当两个向量非常相近时才认为相似，训练出的参数可能过拟合。</p>
+<h3 id="逻辑回归和-SVM-的选择"><a href="#逻辑回归和-SVM-的选择" class="headerlink" title="逻辑回归和 SVM 的选择"></a>逻辑回归和 SVM 的选择</h3><p>如果 n 非常大（相当于 m），逻辑回归或者 SVM 没有核函数</p>
+<p>如果 n 比较小，m 适中， SVM + 高斯核函数</p>
+<p>如果 n 小 m 比较大，添加更多特征，使用逻辑回归或者没有核函数的 SVM</p>
+<h2 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h2><h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><p>非监督学习的训练集 ${x^{(1)},x^{(2)},x^{(3)},…,x^{(m)}}$ 要分类数为 K<br>K-means 算法比较直观：<br>首先随机初始化 K 个 cluster centriods $\mu_1, \mu_2,…,\mu_K$，之后重复以下步骤：</p>
+<ol>
+<li>对所有的 m 个数据： $c^{(i)}$ 设置为离 $x^{(i)}$ 最近的 cluster centriods 索引</li>
+<li>对所有的 K 个： 对索引为 k 的点求平均，然后设置为新的 $\mu_k$</li>
+</ol>
+<p>对应的损失函数</p>
+<p>$$J(c, \mu) &#x3D; \frac{1}{m}\sum_{i&#x3D;1}^{m}\left | x^{(i)} - \mu_{c^{(i)}} \right |^2$$</p>
+<p>这个算法也和随机初始化时选择的位置有关，所以一般会重复多次找到效果最好的一次。</p>
+<p>至于 K 的选择，没有什么更好的办法，所谓的 Elbow 方法就是慢慢增加 K 一直到不能看到明显变化。</p>
+<h3 id="维度规约"><a href="#维度规约" class="headerlink" title="维度规约"></a>维度规约</h3><p>维度规约顾名思义，将原来高维度的数据降维，同时要保持数据大部分的特征。比如降低到二维可以可视化呈现，或者进行数据压缩。</p>
+<p>Principal Component Analysis(主成分分析) 算法<br>将 n 维数据降低到 k 维 </p>
+<ol>
+<li>计算 方差矩阵<br>$$\Sigma &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^{n}(x^{(i)})(x^{(i)})^T$$</li>
+<li>计算矩阵的 eigenvectors<br>$$[U, S, V] &#x3D; svd(Sigma)$$</li>
+</ol>
+<p>这部分只讲了怎么计算，没有解释为什么，涉及到的线代知识后面再补上</p>
+<h3 id="异常检测"><a href="#异常检测" class="headerlink" title="异常检测"></a>异常检测</h3><p>这个涉及到大数定理和高斯正态分布，简单来说已有的数据符合高斯正态分布，我们计算出正态分布的 $\mu$ 和 $\sigma^2$ 对于给定的新数据，计算分布的概率。如果概率小于某个值则认为是异常。</p>
+<p>异常检测其实和监督学习有点像，只是一般来说异常监测的正例数目非常小而且没有一定的特征，比如是否是诈骗邮件。</p>
+<h3 id="大规模机器学习"><a href="#大规模机器学习" class="headerlink" title="大规模机器学习"></a>大规模机器学习</h3><p>简单思路：先用小部分数据训练模型，逐渐增加数据规模。<br>在线的机器学习，并不保留数据，根据新来的直接数据更新参数。<br>MapReduce 不再多说。</p>
+<h3 id="OCR-例子"><a href="#OCR-例子" class="headerlink" title="OCR 例子"></a>OCR 例子</h3><p>视频的最后介绍了一个机器学习的常见应用： OCR。整个流程有：文字检测；字符切割；字符分类。检测的方法没有很好的办法就是滑动窗口，移动窗口逐个检测，逐渐调整窗口大小，字符切割也需要用到滑动窗口。实际感觉这些流程处理起来也不简单。最后还介绍了人工制造数据，比如通过反转图片，扭曲图片来生成新的数据。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>整个视频涉及到的数学知识并不多，而且学习之后的课程练习也可以实实在在的感受到确实可以用来解决一些问题，总体来说确实比较适合的同学吧。</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/04/24/%E4%BD%BF%E7%94%A8-React-%E5%BC%80%E5%8F%91%E9%82%AE%E4%BB%B6%E6%A8%A1%E6%9D%BF/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">使用 React 开发邮件模板</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/07/07/journeyman/%E5%AF%B9%E7%8E%B0%E5%9C%A8%E6%8A%80%E6%9C%AF%E6%A0%88%E7%9A%84%E7%90%86%E8%A7%A3/"><span class="level-item">对当前前端技术栈的理解</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://blog.feibyte.com/2020/08/02/journeyman/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/';
+            this.page.identifier = '2020/08/02/journeyman/机器学习笔记/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">51</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">学习笔记</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/"><span class="level-start"><span class="level-item">实践总结</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">技术杂谈</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/"><span class="level-start"><span class="level-item">设计实现</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2024/07/19/Designing-data-intensive-applications-note-partition/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 分区"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-19T13:17:22.000Z">2024-07-19</time></p><p class="title"><a href="/2024/07/19/Designing-data-intensive-applications-note-partition/">《Designing Data Intensive Applications》读书笔记 - 分区</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/16/Designing-data-intensive-applications-note-replication/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 数据库复制"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-16T13:17:22.000Z">2024-07-16</time></p><p class="title"><a href="/2024/07/16/Designing-data-intensive-applications-note-replication/">《Designing Data Intensive Applications》读书笔记 - 数据库复制</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/07/Designing-data-intensive-applications-note-storage/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 存储和索引"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-07T13:17:22.000Z">2024-07-07</time></p><p class="title"><a href="/2024/07/07/Designing-data-intensive-applications-note-storage/">《Designing Data Intensive Applications》读书笔记 - 存储和索引</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/10/Designing-data-intensive-applications-note-transaction/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 事务"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-10T13:17:22.000Z">2024-06-10</time></p><p class="title"><a href="/2024/06/10/Designing-data-intensive-applications-note-transaction/">《Designing Data Intensive Applications》读书笔记 - 事务</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/07/The-DynamoDB-Book-note/"><img src="/gallery/thumbnails/2024/dynamodb-book.png" alt="《The DynamoDB Book》读书笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-07T13:17:22.000Z">2024-06-07</time></p><p class="title"><a href="/2024/06/07/The-DynamoDB-Book-note/">《The DynamoDB Book》读书笔记</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="tag">读书笔记</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DataBase/"><span class="tag">DataBase</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tag">工具</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DynamoDB/"><span class="tag">DynamoDB</span><span class="tag">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

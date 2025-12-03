@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><meta name="msvalidate.01" content="2CB4988EF2694D3ED16C6614D070E697"><title>《Designing Data Intensive Applications》读书笔记 - 事务 - Fedeoo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="最近读到的最好的一本技术书，评价非常高，堪称经典。书还未读完，收获很大，值得记录的很多。这一篇博客先讲事务，真心觉得这本书解释的非常清楚，胜过很多的博客。"><meta property="og:type" content="blog"><meta property="og:title" content="《Designing Data Intensive Applications》读书笔记 - 事务"><meta property="og:url" content="http://blog.feibyte.com/2024/06/10/Designing-data-intensive-applications-note-transaction/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="最近读到的最好的一本技术书，评价非常高，堪称经典。书还未读完，收获很大，值得记录的很多。这一篇博客先讲事务，真心觉得这本书解释的非常清楚，胜过很多的博客。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"><meta property="article:published_time" content="2024-06-10T13:17:22.000Z"><meta property="article:modified_time" content="2025-12-03T09:25:38.750Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="DataBase"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.feibyte.com/2024/06/10/Designing-data-intensive-applications-note-transaction/"},"headline":"《Designing Data Intensive Applications》读书笔记 - 事务","image":["http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"],"datePublished":"2024-06-10T13:17:22.000Z","dateModified":"2025-12-03T09:25:38.750Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"http://blog.feibyte.com/gallery/site/logo.png"}},"description":"最近读到的最好的一本技术书，评价非常高，堪称经典。书还未读完，收获很大，值得记录的很多。这一篇博客先讲事务，真心觉得这本书解释的非常清楚，胜过很多的博客。"}</script><link rel="canonical" href="http://blog.feibyte.com/2024/06/10/Designing-data-intensive-applications-note-transaction/"><link rel="icon" href="/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="English" href="https://blog.feibyte.com/en">English</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-06-10T13:17:22.000Z" title="10/06/2024, 11:17:22 pm">2024-06-10</time>发表</span><span class="level-item"><time dateTime="2025-12-03T09:25:38.750Z" title="03/12/2025, 8:25:38 pm">2025-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">13 分钟读完 (大约2007个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">《Designing Data Intensive Applications》读书笔记 - 事务</h1><div class="content"><p>最近读到的最好的一本技术书，评价非常高，堪称经典。书还未读完，收获很大，值得记录的很多。<br>这一篇博客先讲事务，真心觉得这本书解释的非常清楚，胜过很多的博客。</p>
+<span id="more"></span>
+
+<p>事务<br>不是所有的的应用都支持事务，有些应用为了高性能或者高可用性就完全舍弃了事务。是否需要事务，首先需要理解事务能够解决的问题以及需要付出的成本。</p>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p>事务的四个特性：原子性、一致性、隔离性、持久性。</p>
+<ol>
+<li><strong>原子性</strong> 原子性通常来说事物不可分割，但是无论如何，事务都无法做到像原子一样不可拆分，所以作者认为更合理的名字是 <code>abortability</code>，就是事务在出错时可中止。</li>
+<li><strong>一致性</strong> 关于数据的某些陈述一直为真，比如转账事务，转账前后的总金额应该是相同的。作者认为一致性的定义取决于应用对不可变性的定义，应该由应用来定义事务的正确性，而不是由数据库来定义。</li>
+<li><strong>隔离性</strong> 并发执行的事务互相隔离，或者说可顺序执行。并发事务的结果应该与顺序执行的结果一致。但是实际上，顺序级的隔离很少见，因为会导致性能问题。</li>
+<li><strong>持久性</strong> 事务提交后，数据应该持久化，即使系统崩溃也不会丢失。对于单节点数据库，意味着数据写入磁盘，对于分布式数据库，意味着数据写入多个节点。这儿要强调的是完全的持久性是不存在的。</li>
+</ol>
+<p>单个对象写也涉及到原子性和隔离性，但是事务一般理解为对多个对象的一组操作。</p>
+<p>事务的关键特性是出错时可以中止并且可以进行重试。但是一些常见的 ORM 框架并不会进行重试，而是直接抛出异常。 <code>This is a shame, because the whole point of aborts is to enable safe retries.</code><br>重试看起来很容易，但是有些问题：</p>
+<ol>
+<li>如果是网络问题，重试可能会导致重复操作。</li>
+<li>如果是过载问题，重试只会加重负载。</li>
+<li>只有暂时性的问题才能重试，如果是永久性的问题，重试是没有意义的。</li>
+<li>如果事务中有副作用，比如事务失败发邮件，重试可能会导致重复发送邮件。</li>
+<li><code>If the client process fails while retrying, any data it was trying to write to the database is lost</code> 没 Get 到这句话的意思。</li>
+</ol>
+<h2 id="弱隔离级别"><a href="#弱隔离级别" class="headerlink" title="弱隔离级别"></a>弱隔离级别</h2><p>序列化隔离级别是最高的，但是实际上很少使用，因为性能问题。大多数数据库使用的是弱隔离级别。</p>
+<h2 id="读提交（Read-Commited）"><a href="#读提交（Read-Commited）" class="headerlink" title="读提交（Read Commited）"></a>读提交（Read Commited）</h2><p>最基本的事务隔离级别，确保：</p>
+<ol>
+<li>没有脏读</li>
+<li>没有脏写，注意并不包括两个 Counter 自增的问题</li>
+</ol>
+<p>防止脏写最常见的方法是使用行级锁，事务修改一行时必须先获取到锁，其他事务修改同一行时会被阻塞。<br>防止脏读使用锁就不现实了，因为一个耗时的写事务会导致读事务长时间等待。</p>
+<h2 id="Snapshot-Isolation-or-Repeatable-Read-可重复读"><a href="#Snapshot-Isolation-or-Repeatable-Read-可重复读" class="headerlink" title="Snapshot Isolation or Repeatable Read (可重复读)"></a>Snapshot Isolation or Repeatable Read (可重复读)</h2><p>读提交包括了所有事务要求的特性，可以中止，阻止读取未提交数据，脏写。但是仍有其它并发问题，比如不可重复读，事务前后读取结果不一样，虽然最终数据一致，但是用户可能困惑，在备份数据时可能出现不一致问题。<br>书中并没有说明前后两次读是在一个事务中，所举的场景比如：备份，分析查询和数据完整性检查，都是现实中的普通场景。</p>
+<p>可重复读的实现一般是使用多版本并发控制（MVCC），简单来说，对于每个事务都对应着一个唯一的增长的事务 ID，每条被写入的数据都有一个事务 ID。<br>书中使用两个字段：<code>created_by</code> 和 <code>delete_by</code>，更新对应的是删除和添加。对应的可见性规则：</p>
+<ol>
+<li>每个事务开始时，数据库列出所有未提交的事务以及已经中止的事务，这些事务的写入都被忽略，即便后续提交。</li>
+<li>任何中止事务的写入被忽略</li>
+<li>任何 transaction ID 大于当前事务 ID 的写入被忽略</li>
+<li>所有其它写入都是可见的</li>
+</ol>
+<p>MVCC 的索引 一种方法是过滤掉不可见数据，另一种方法是就像 immutable 树，索引树对每个事务都有不同根节点。</p>
+<p>Snapshot Isolation 有不同的名字，Oracle 叫做 <code>serializable</code>，PostgreSQL 和 MySQL 是 <code>repeatable read</code>，</p>
+<h3 id="Lost-Updates-更新丢失"><a href="#Lost-Updates-更新丢失" class="headerlink" title="Lost Updates (更新丢失)"></a>Lost Updates (更新丢失)</h3><p>一些场景：</p>
+<ol>
+<li>自增或者根据当前值更新</li>
+<li>集合添加，读取集合之后添加</li>
+<li>两个用户同时编辑 wiki 页面，每个用户保存整个页面内容，覆盖当前数据库内容</li>
+</ol>
+<p>解决方案：</p>
+<ol>
+<li><strong>原子写</strong> <code>UPDATE counters SET value = value + 1 WHERE ...</code></li>
+<li><strong>显式锁</strong> <code>SELECT ... FOR UPDATE</code> 就是很容易遗漏</li>
+<li><strong>自动检测</strong> 数据库可以执行非常高效的检测（PostgreSQL, Oracle, SQL Server）， MySQL 没有</li>
+</ol>
+<h3 id="Write-Skew-and-Phantoms"><a href="#Write-Skew-and-Phantoms" class="headerlink" title="Write Skew and Phantoms"></a>Write Skew and Phantoms</h3><p>书中例子，两个 on-call 医生同时请假，系统约束必须有一个医生在岗。在事务中，先查询在岗人数，如果人数大于 2，取消 one on-call。 如果发生竞争条件，有可能两个人都请假，导致系统没有医生在岗。<br>这个可以说是 更新丢失的一个泛化，先查询再更新，更新之后不再满足约束。还有一个订会议室的例子，先查询给定会议室在时间区间内是否有预定，如果没有，预定会议室。</p>
+<p>这儿的主要问题是没有一个合适的对象可以加锁， <code>Materializing conflicts</code> 方案，维护会议室和 time slots (时间段) 的表，这样就可以给查询到的行加锁。这种方案容易出错，通常又不够优雅，不如直接考虑序列化。</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><h3 id="真正的序列化"><a href="#真正的序列化" class="headerlink" title="真正的序列化"></a>真正的序列化</h3><p>真正的序列化变得可行因为 RAM 够大， OLTP 很少部分数据进行读写而且读写一般很快。</p>
+<h3 id="两段锁-Two-Phase-Locking"><a href="#两段锁-Two-Phase-Locking" class="headerlink" title="两段锁 (Two-Phase Locking)"></a>两段锁 (Two-Phase Locking)</h3><p>在事务开始时，获取所有需要的锁，直到事务结束才释放锁。死锁更容易发生，毕竟事务开始时就获取所有锁，一直持有到事务结束。</p>
+<h3 id="Serializable-Snapshot-Isolation-SSI"><a href="#Serializable-Snapshot-Isolation-SSI" class="headerlink" title="Serializable Snapshot Isolation (SSI)"></a>Serializable Snapshot Isolation (SSI)</h3><p>SSI 是基于 Snapshot Isolation 的，增加算法检测冲突。<br>检测 Query 结果变化</p>
+<ol>
+<li>检测对过时 MVCC 对象版本的数据读 </li>
+<li>检测读后写</li>
+</ol>
+<p>工程细节影响算法实际表现。事务读写数据的粒度，如果跟踪很细，识别需要中止的事务就比较精准，反之就比较粗糙，中止事务的可能性就比较大。<br>对读比较多的应用而言，SSI 非常有吸引力</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>读完这部分再看一些关于事务的博客总觉得他们写的不够精准。这本书本身讲的也很清楚，很容易理解，非常值得一读。</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/DataBase/">DataBase</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/07/07/Designing-data-intensive-applications-note-storage/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">《Designing Data Intensive Applications》读书笔记 - 存储和索引</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/06/07/The-DynamoDB-Book-note/"><span class="level-item">《The DynamoDB Book》读书笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://blog.feibyte.com/2024/06/10/Designing-data-intensive-applications-note-transaction/';
+            this.page.identifier = '2024/06/10/Designing-data-intensive-applications-note-transaction/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">51</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">学习笔记</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/"><span class="level-start"><span class="level-item">实践总结</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">技术杂谈</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/"><span class="level-start"><span class="level-item">设计实现</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2024/07/19/Designing-data-intensive-applications-note-partition/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 分区"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-19T13:17:22.000Z">2024-07-19</time></p><p class="title"><a href="/2024/07/19/Designing-data-intensive-applications-note-partition/">《Designing Data Intensive Applications》读书笔记 - 分区</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/16/Designing-data-intensive-applications-note-replication/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 数据库复制"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-16T13:17:22.000Z">2024-07-16</time></p><p class="title"><a href="/2024/07/16/Designing-data-intensive-applications-note-replication/">《Designing Data Intensive Applications》读书笔记 - 数据库复制</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/07/Designing-data-intensive-applications-note-storage/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 存储和索引"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-07T13:17:22.000Z">2024-07-07</time></p><p class="title"><a href="/2024/07/07/Designing-data-intensive-applications-note-storage/">《Designing Data Intensive Applications》读书笔记 - 存储和索引</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/10/Designing-data-intensive-applications-note-transaction/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 事务"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-10T13:17:22.000Z">2024-06-10</time></p><p class="title"><a href="/2024/06/10/Designing-data-intensive-applications-note-transaction/">《Designing Data Intensive Applications》读书笔记 - 事务</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/07/The-DynamoDB-Book-note/"><img src="/gallery/thumbnails/2024/dynamodb-book.png" alt="《The DynamoDB Book》读书笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-07T13:17:22.000Z">2024-06-07</time></p><p class="title"><a href="/2024/06/07/The-DynamoDB-Book-note/">《The DynamoDB Book》读书笔记</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="tag">读书笔记</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DataBase/"><span class="tag">DataBase</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tag">工具</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DynamoDB/"><span class="tag">DynamoDB</span><span class="tag">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

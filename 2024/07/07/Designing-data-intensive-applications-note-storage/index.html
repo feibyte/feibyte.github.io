@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><meta name="msvalidate.01" content="2CB4988EF2694D3ED16C6614D070E697"><title>《Designing Data Intensive Applications》读书笔记 - 存储和索引 - Fedeoo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="首先讨论传统关系性数据库使用的存储引擎，分为两类：日志结构存储引擎和页面结构存储引擎。"><meta property="og:type" content="blog"><meta property="og:title" content="《Designing Data Intensive Applications》读书笔记 - 存储和索引"><meta property="og:url" content="http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-storage/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="首先讨论传统关系性数据库使用的存储引擎，分为两类：日志结构存储引擎和页面结构存储引擎。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"><meta property="article:published_time" content="2024-07-07T13:17:22.000Z"><meta property="article:modified_time" content="2025-12-03T09:25:38.750Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="DataBase"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-storage/"},"headline":"《Designing Data Intensive Applications》读书笔记 - 存储和索引","image":["http://blog.feibyte.com/gallery/thumbnails/2024/designing-data-intensive-applications-book.png"],"datePublished":"2024-07-07T13:17:22.000Z","dateModified":"2025-12-03T09:25:38.750Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"http://blog.feibyte.com/gallery/site/logo.png"}},"description":"首先讨论传统关系性数据库使用的存储引擎，分为两类：日志结构存储引擎和页面结构存储引擎。"}</script><link rel="canonical" href="http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-storage/"><link rel="icon" href="/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="English" href="https://blog.feibyte.com/en">English</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-07-07T13:17:22.000Z" title="07/07/2024, 11:17:22 pm">2024-07-07</time>发表</span><span class="level-item"><time dateTime="2025-12-03T09:25:38.750Z" title="03/12/2025, 8:25:38 pm">2025-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">16 分钟读完 (大约2443个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">《Designing Data Intensive Applications》读书笔记 - 存储和索引</h1><div class="content"><p>首先讨论传统关系性数据库使用的存储引擎，分为两类：日志结构存储引擎和页面结构存储引擎。</p>
+<span id="more"></span>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="Hash-索引"><a href="#Hash-索引" class="headerlink" title="Hash 索引"></a>Hash 索引</h3><p>首先从最简单的 <code>key-value</code> 数据库开始，只有两个函数的脚本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="function"><span class="title">db_set</span></span> () &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$1</span>,<span class="variable">$2</span>&quot;</span> &gt;&gt; database</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">db_get</span></span> () &#123;</span><br><span class="line">    grep <span class="string">&quot;^<span class="variable">$1</span>,&quot;</span> database | sed -e <span class="string">&quot;s/^<span class="variable">$1</span>,//&quot;</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据写入以追加的方式添加到文件结尾，数据读取从文件结尾开始匹配目标 key，修改数据也是以追加一条新记录的形式，删除数据需要一个特殊的 tombstone 标志。<br>数据的检索存在问题，每次都需要扫描所有数据，时间复杂度为 O(n)。 很容易想到，在内存中保存一份索引，记录 key 对应的文件记录偏移。</p>
+<p>现在的一个问题是如何避免磁盘写满，一个方案是将记录文件进行分片，当文件达到一定大小时就开始写入新文件。在写入新的分片文件时，旧的分片文件可以进行压缩，合并。<br>查找过程，需要先查找新分片的索引，再查找次新分片的索引。</p>
+<p>这个实现看上去太过简单，实际上非常可行。数据的写入非常高效，因为磁盘顺序写没有寻道时间, <code>Bitcask</code> 就是这种实现方式。适用于每个值频繁更新的情况，比如视频播放计数。</p>
+<p><strong>一些实现细节</strong></p>
+<ol>
+<li><strong>文件格式</strong> CSV 并不是最合适的格式。更快更简单的二进制格式：首先编码字符串长度，然后是字符串本身。</li>
+<li><strong>删除记录</strong> 追加一个特殊的删除记录，标记为删除（tombstone） 合并分片的时候，丢弃给定 key tombstone 之前的记录。</li>
+<li><strong>故障恢复</strong> 数据库重启时，内存中的哈希表会丢失，通过文件重新建立索引太过耗时，<code>Bitcask</code> 存储哈希表的快照，直接从快照中恢复。</li>
+<li><strong>部分写记录</strong> 写入过程中崩溃，校验和</li>
+<li><strong>并发控制</strong> 一般实现是只有一个写线程，读线程可以并发。文件分片不会改变，所以支持多线程并发读</li>
+</ol>
+<p><strong>优点</strong><br>只追加的日志看起来浪费，好处是：</p>
+<ol>
+<li>追加和分片合并是顺序写，磁盘顺序写比随机写快很多。</li>
+<li>并发和故障恢复更简单，不需要考虑并发写入的问题。</li>
+<li>合并旧分片可以避免文件碎片化，提高读取性能。</li>
+</ol>
+<p><strong>局限</strong> </p>
+<ol>
+<li>索引需要能够整个存入内存，理论上可以放在上磁盘上，操作系统可以交换磁盘，实际上效率也非常低（随机访问时交换频率很高）</li>
+<li>范围查找效率依然很低。</li>
+</ol>
+<h3 id="SSTable-和-LSM-Tree"><a href="#SSTable-和-LSM-Tree" class="headerlink" title="SSTable 和 LSM-Tree"></a>SSTable 和 LSM-Tree</h3><p>接下来做些小的改变，保持键值对有序，按 key 排序，我们将这个格式称为 SSTable（Sorted String Table）。<br>咋看上去这可能会破坏我们的顺序写，不过可以带来几个好处：</p>
+<ol>
+<li>文件进行分片，合并压缩过程非常高效，归并排序的合并过程，时间复杂度是 O(n)</li>
+<li>哈希文件不需要保持所有的 key，现在可以维护一个稀疏索引。</li>
+<li>范围查询时，整块读取，可以减少磁盘带宽的使用</li>
+</ol>
+<p><strong>初始有序文件的创建</strong><br>在写入文件之前，可以将记录保存在内存中，使用红黑树维护顺序，超过一定大小之后写入文件。为了应对故障，同时需要维护一个 WAL 日志文件</p>
+<p><strong>未命中查询</strong><br><code>LSM-tree</code> 在查找不存在的 key 时性能比较慢，一个办法是 <code>Bloom Filter</code>，这样可以快速判断 key 是否存在。</p>
+<p>B-Trees</p>
+<p><code>B-Tree</code> 可以说是广泛使用的一种索引结构，和 <code>LSM-Tree</code> 唯一的相同之处就是保持记录在文件中有序。最突出的不同是，每个 key 在文件中只有一个记录，修改是直接操作磁盘。<br>管理文件是以页或块（对应操作系统中的页）为单元，将索引结构以树的形式组织。</p>
+<p><strong>优化</strong></p>
+<ol>
+<li>不去覆写页和维护 WAL，而是写入一个新的页，然后更新父节点的引用</li>
+<li>不存储整个 key, 只保存缩写，只需要用来确定 key 的范围即可，这样子一个页内可以存放更多的key, 整个树的高度更低</li>
+<li>一般来说，页可以在磁盘的任意位置，很多 B 树的实现让叶子节点在磁盘上连续。但是，随着树的增长，这个顺序很难维持</li>
+<li>额外的指针，叶子节点之间的指针，可以加速范围查询</li>
+<li>B 树变种 fractal trees 借鉴了 LSM-tree 的思想减少磁盘寻道</li>
+</ol>
+<p><strong>比较</strong><br>根据经验，LSM-Tree 写入速度更快，B-Tree 读取速度更快</p>
+<p><strong>LSM-Tree 优点</strong>：</p>
+<ol>
+<li>顺序写磁盘，磁盘吞吐量高</li>
+<li>更好的压缩，避免磁盘碎片化</li>
+</ol>
+<p><strong>LSM-Tree 缺点</strong>：</p>
+<ol>
+<li>压缩操作可能会影响正在进行的读和写，磁盘带宽必须和压缩写共享</li>
+<li>不合理的配置，如果压缩合并跟不上写入的速度，可能导致磁盘耗尽</li>
+</ol>
+<p><strong>B-Tree 优点</strong>：</p>
+<ol>
+<li>一个 key 只在一个地方，容易实现并发控制</li>
+</ol>
+<p><strong>B-Tree 缺点</strong>：</p>
+<ol>
+<li>块大小固定，磁盘碎片化</li>
+<li>至少写入两次磁盘，写放大比 LSM-Tree 显著</li>
+</ol>
+<p>其它索引结构</p>
+<ol>
+<li>聚簇索引 存储值和索引在一起，不需要再次查找 MySQL 主键索引就是聚簇索引，二级索引引用主键</li>
+<li>多列索引，比如按经纬度查询</li>
+<li>全文搜索，模糊索引</li>
+<li>所有内容在内存</li>
+</ol>
+<h2 id="事务处理或分析"><a href="#事务处理或分析" class="headerlink" title="事务处理或分析"></a>事务处理或分析</h2><p>数据库除了用于 OLTP 也越来越多的用于 OLAP 一般来说，数据分析需要扫描很多记录，同时只关心少数几列，往往会进行聚合计算。</p>
+<h3 id="数据仓库"><a href="#数据仓库" class="headerlink" title="数据仓库"></a>数据仓库</h3><p>单独的数据库运行分析查询，不会影响 OLTP 操作。数据是从 OLTP 数据提取，转化为分析友好的模式，清洗加载到数据仓库（ETL）。使用单独的数据库最大的好处是可以为分析访问模式优化数据仓库。</p>
+<p><strong>区别</strong><br>数据仓库的数据模型通常是关系性，因为 SQL 非常适于分析查询。表面上看数据仓库和 关系性 OLTP 数据库比较相似，但是系统内部非常不同，因为各自为不同的查询模式优化。</p>
+<p><strong>星形模式</strong><br>不像事务处理会有多样的数据模型，分析处理模型较为一致，star schema.<br>模式中心称为 fact-table 每行通常是一个单独的事件，比如网页浏览或者点击，包含其它纬度的数据说明何人何事何时何地以及为何。星形模式是因为 fact-table 在中心和其它纬度的表相关联，形状像星形。</p>
+<h3 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h3><p>通常 fact-table  非常大量的数据，经常超过 100 多列，查询时一般只会涉及到 4-5 列。为了支持高效查询，通常选择列式存储。</p>
+<p><strong>压缩列</strong><br>每列的数据经常重复，可以非常高效的进行压缩，基于列中数据，可以选择不同的压缩方式。一种相当有效方式是：位图编码<br>例如，销售记录可能有上亿行，而商品只有 n 种，我们就可以选择将其转换为 n 万个不同的位图。如果 n 很小 (200) , 每行可以用 1 个位表示，如果 n 很大（比较稀疏），可以使用游程编码方法（run-length encoded）<br>位图索引非常适合常见的查询，比如下面的查询只需要进行对应的位操作即可。<br><code>WHERE product_sk = 31 AND store_sk = 3:</code><br><code>WHERE product_sk IN (30, 68, 69):</code></p>
+<p>列式存储可以更高效的利用 CPU 周期，列压缩允许更多的行放入 CPU 一级缓存。</p>
+<p><strong>排序</strong><br>不同的查询受益于不同的排序，存储冗余数据以不同的排序方式</p>
+<p><strong>写入</strong><br>就地更新的方式对于压缩的列不大可能，不过可以借鉴 LSM-Tree 的思路，所有的写先存入内存，等到足够多时再写入磁盘。查询时合并两个结果。</p>
+<p><strong>物化视图</strong>（materialized view ）<br>多个查询使用相同的聚合，直接缓存起来更为高效。数据变更时，视图需要重新更新 （OLAP 很少更新）<br>data cubes  比如，产生销售数据，聚合数据按时间和产品，之后方便查询。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>数据存储和索引是数据库的核心，不同的查询模式需要不同的存储和索引方式。OLTP 和 OLAP 有不同的查询模式，需要不同的存储方式。</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/DataBase/">DataBase</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/07/16/Designing-data-intensive-applications-note-replication/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">《Designing Data Intensive Applications》读书笔记 - 数据库复制</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/06/10/Designing-data-intensive-applications-note-transaction/"><span class="level-item">《Designing Data Intensive Applications》读书笔记 - 事务</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://blog.feibyte.com/2024/07/07/Designing-data-intensive-applications-note-storage/';
+            this.page.identifier = '2024/07/07/Designing-data-intensive-applications-note-storage/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">51</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">学习笔记</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/"><span class="level-start"><span class="level-item">实践总结</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">技术杂谈</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/"><span class="level-start"><span class="level-item">设计实现</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2024/07/19/Designing-data-intensive-applications-note-partition/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 分区"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-19T13:17:22.000Z">2024-07-19</time></p><p class="title"><a href="/2024/07/19/Designing-data-intensive-applications-note-partition/">《Designing Data Intensive Applications》读书笔记 - 分区</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/16/Designing-data-intensive-applications-note-replication/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 数据库复制"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-16T13:17:22.000Z">2024-07-16</time></p><p class="title"><a href="/2024/07/16/Designing-data-intensive-applications-note-replication/">《Designing Data Intensive Applications》读书笔记 - 数据库复制</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/07/Designing-data-intensive-applications-note-storage/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 存储和索引"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-07T13:17:22.000Z">2024-07-07</time></p><p class="title"><a href="/2024/07/07/Designing-data-intensive-applications-note-storage/">《Designing Data Intensive Applications》读书笔记 - 存储和索引</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/10/Designing-data-intensive-applications-note-transaction/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 事务"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-10T13:17:22.000Z">2024-06-10</time></p><p class="title"><a href="/2024/06/10/Designing-data-intensive-applications-note-transaction/">《Designing Data Intensive Applications》读书笔记 - 事务</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/07/The-DynamoDB-Book-note/"><img src="/gallery/thumbnails/2024/dynamodb-book.png" alt="《The DynamoDB Book》读书笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-07T13:17:22.000Z">2024-06-07</time></p><p class="title"><a href="/2024/06/07/The-DynamoDB-Book-note/">《The DynamoDB Book》读书笔记</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="tag">读书笔记</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DataBase/"><span class="tag">DataBase</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tag">工具</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DynamoDB/"><span class="tag">DynamoDB</span><span class="tag">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

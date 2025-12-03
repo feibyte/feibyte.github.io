@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><meta name="msvalidate.01" content="2CB4988EF2694D3ED16C6614D070E697"><title>CSAPP 笔记 - Fedeoo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="《深入理解计算机系统》这本书是 CS 的经典书目。翻看之处，思绪总是回到学校，感慨良多，也悔恨当年在学校没有好好学艺，更没有穷根究底的思考。整体来看的话，这本书更像是导论，所讲内容部分属于计算机组成原理，部分是操作系统，还有部分汇编。单从知识点上，这本书讲的并不全面，不过还是有不少收获。"><meta property="og:type" content="blog"><meta property="og:title" content="CSAPP 笔记"><meta property="og:url" content="http://blog.feibyte.com/2020/03/29/journeyman/CSAPP-%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="《深入理解计算机系统》这本书是 CS 的经典书目。翻看之处，思绪总是回到学校，感慨良多，也悔恨当年在学校没有好好学艺，更没有穷根究底的思考。整体来看的话，这本书更像是导论，所讲内容部分属于计算机组成原理，部分是操作系统，还有部分汇编。单从知识点上，这本书讲的并不全面，不过还是有不少收获。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://blog.feibyte.com/gallery/thumbnails/csapp2.jpg"><meta property="article:published_time" content="2020-03-28T23:44:21.000Z"><meta property="article:modified_time" content="2025-12-03T09:25:38.751Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="读书笔记"><meta property="article:tag" content="CS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://blog.feibyte.com/gallery/thumbnails/csapp2.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.feibyte.com/2020/03/29/journeyman/CSAPP-%E7%AC%94%E8%AE%B0/"},"headline":"CSAPP 笔记","image":["http://blog.feibyte.com/gallery/thumbnails/csapp2.jpg"],"datePublished":"2020-03-28T23:44:21.000Z","dateModified":"2025-12-03T09:25:38.751Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"http://blog.feibyte.com/gallery/site/logo.png"}},"description":"《深入理解计算机系统》这本书是 CS 的经典书目。翻看之处，思绪总是回到学校，感慨良多，也悔恨当年在学校没有好好学艺，更没有穷根究底的思考。整体来看的话，这本书更像是导论，所讲内容部分属于计算机组成原理，部分是操作系统，还有部分汇编。单从知识点上，这本书讲的并不全面，不过还是有不少收获。"}</script><link rel="canonical" href="http://blog.feibyte.com/2020/03/29/journeyman/CSAPP-%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="English" href="https://blog.feibyte.com/en">English</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-03-28T23:44:21.000Z" title="29/03/2020, 10:44:21 am">2020-03-29</time>发表</span><span class="level-item"><time dateTime="2025-12-03T09:25:38.751Z" title="03/12/2025, 8:25:38 pm">2025-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">32 分钟读完 (大约4731个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">CSAPP 笔记</h1><div class="content"><p>《深入理解计算机系统》这本书是 CS 的经典书目。翻看之处，思绪总是回到学校，感慨良多，也悔恨当年在学校没有好好学艺，更没有穷根究底的思考。整体来看的话，这本书更像是导论，所讲内容部分属于计算机组成原理，部分是操作系统，还有部分汇编。单从知识点上，这本书讲的并不全面，不过还是有不少收获。</p>
+<span id="more"></span>
+<p>在读此书之前，刷了一遍 CS50 的视频。如果没有 CS 的专业背景，非常推荐看下这个视频。</p>
+<h2 id="信息的表示"><a href="#信息的表示" class="headerlink" title="信息的表示"></a>信息的表示</h2><p>布尔代数和环，抽象代数。大学学过离散数学这门课，里面有部分讲到抽象代数，现在啥都不记得了。</p>
+<h3 id="C-语言中的无符号数和有符号数"><a href="#C-语言中的无符号数和有符号数" class="headerlink" title="C 语言中的无符号数和有符号数"></a>C 语言中的无符号数和有符号数</h3><p>无符号数和有符号数可以互相复制，转换是隐式的。如果运算的两个数分别是有符号和无符号，C 将会隐含地转为无符号数。有些时候的运算结果是违反直接的，比如 <code>-1 &lt; 0u</code> 结果为 <code>0</code>。 书中给了一个下面一个例子，当 length 为了时，直接抛出存储器错误。这是因为 length - 1 得到的是一个无符号数 0xffffffff。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">sum_element</span><span class="params">(<span class="type">float</span> a[], <span class="type">unsigned</span> length)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">float</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        result += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决的办法就是大多数语言禁用无符号数。</p>
+<h3 id="溢出问题"><a href="#溢出问题" class="headerlink" title="溢出问题"></a>溢出问题</h3><p>有些语言（python）自动处理了这个问题，自动转为大数类型并支持大数的运算。</p>
+<h3 id="浮点"><a href="#浮点" class="headerlink" title="浮点"></a>浮点</h3><p>以 32 位单精度浮点数为例，浮点数的表示形式为<br>[sign + exp + frac]<br>sign 符号位 1位， exp 指数为 8 位，frac小数位 23 位。指数偏移 Bias 为 127 &#x3D; 2^7 - 1</p>
+<p>根据 exp 值不同，有三种情况<br>规格化值：exp 即非全 0 也非 全 1 指数值为 e - Bias 小数值为 1.frac<br>非规格化：exp 全 0 指数值为 1 - Bias<br>特殊值：exp 全 1 无穷以及 NaN</p>
+<p>书中的示例 k &#x3D; 4, n &#x3D; 3, Bias &#x3D; 2^3 -1 &#x3D; 7</p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>位表示</th>
+<th>e</th>
+<th>E</th>
+<th>f</th>
+<th>M</th>
+<th>V</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0 0000 000</td>
+<td>0</td>
+<td>-6</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>最小的非规格化数</td>
+<td>0 0000 001</td>
+<td>0</td>
+<td>-6</td>
+<td>1&#x2F;8</td>
+<td>1&#x2F;8</td>
+<td>1&#x2F;512</td>
+</tr>
+<tr>
+<td></td>
+<td>0 0000 010</td>
+<td>0</td>
+<td>-6</td>
+<td>2&#x2F;8</td>
+<td>2&#x2F;8</td>
+<td>2&#x2F;512</td>
+</tr>
+<tr>
+<td>最大的非规格化数</td>
+<td>0 0000 111</td>
+<td>0</td>
+<td>-6</td>
+<td>7&#x2F;8</td>
+<td>7&#x2F;8</td>
+<td>7&#x2F;512</td>
+</tr>
+<tr>
+<td>最小的规格化数</td>
+<td>0 0001 000</td>
+<td>1</td>
+<td>-6</td>
+<td>0</td>
+<td>8&#x2F;8</td>
+<td>8&#x2F;512</td>
+</tr>
+<tr>
+<td></td>
+<td>0 0001 001</td>
+<td>1</td>
+<td>-6</td>
+<td>1&#x2F;8</td>
+<td>9&#x2F;8</td>
+<td>9&#x2F;512</td>
+</tr>
+<tr>
+<td>最大的规格化数</td>
+<td>0 1110 111</td>
+<td>14</td>
+<td>7</td>
+<td>7&#x2F;8</td>
+<td>15&#x2F;8</td>
+<td>240</td>
+</tr>
+</tbody></table>
+<p>通过这个例子，我们应该可以看出，从非规格化数到规格化数的平滑过渡。也是上面非规格化数取为 1 - Bias 而非 -Bias 的原因。<br>注意的是，即便 32 位浮点数表示的范围超过 32 位整数，同样的位数能够表示的数字是一样多的。超过一定范围之后，可以表示的整数将不再是连续的。有道习题是：给出不能够准确描述的最小正整数公式。答案是 2^(n + 1) + 1 这个数只跟 n 有关系，对于 32 位单精度浮点数来说就是 2^24 + 1 远小于 32 位整数的表示范围的。</p>
+<h3 id="浮点的舍入"><a href="#浮点的舍入" class="headerlink" title="浮点的舍入"></a>浮点的舍入</h3><ol>
+<li>就近舍入 1.01111 舍入 1 位时就是 1.1 </li>
+<li>向偶数舍入（向下和向上同样距离），举个例子：1.01101 舍入 4 位时，可以选择向上  1.0111 或者向下 1.0110 向偶数舍入则选择 1.0110</li>
+</ol>
+<p>这跟我们十进制的四舍五入可能会有不同表现：<br>1.445 舍入两位是 1.45  1.435 舍入两位是 1.43 原因是 1.43 离 1.435 要更近一些因为精度问题。<br><code>1.435</code> 的二进制形式为 0x3fb7ae14, sign &#x3D; 0, exponent &#x3D; 0x7f, fraction &#x3D; 0x37ae14<br><code>1.44</code> 的二进制形式为 0x3fb851ec, sign &#x3D; 0, exponent &#x3D; 0x7f, fraction &#x3D; 0x3851ec 差 41944<br><code>1.43</code> 的二进制形式为 0x3fb70a3d, sign &#x3D; 0, exponent &#x3D; 0x7f, fraction &#x3D; 0x370a3d 差 41943</p>
+<p>PS：C 和 JavaScript 得到的都是同样的结果。</p>
+<p>最后，好奇为什么这么设计浮点数或者工程师们是怎么想到这样设计浮点数的。我们可以看到在数值比较小的时候密度比较大，能表示的精度也很高，这也是巧妙之处。一般人能想到表示浮点数的方法可能比较符合直觉：整数部分 + 小数部分。相比之下，孰优孰劣,自见分晓。</p>
+<h2 id="程序的机器级表示"><a href="#程序的机器级表示" class="headerlink" title="程序的机器级表示"></a>程序的机器级表示</h2><p>这一章信息量很大，回顾 Intel 的体系结构，整数寄存器，汇编指令格式，寻址方式。</p>
+<p>从寻址方式看，C 中的指针是很自然不过的存在，寄存器间接寻址，以及相对基址变址 <code>Imm(Eb, Ei, s)</code> 表示的地址是 <code>(Imm + R[Eb] + R[Ei] * s)</code>，可以满足很多情况下的指针运算，对于 (int*) 的指针 p++ 时 s &#x3D; 4 只需简单的将 R[Ei] 加 1 即可做到。后面提到，对于基本类型的数组访问，s 都能满足。</p>
+<p>之前学习的时候，汇编和 C 都是单独的课程，这一章将 C 编译成对应的汇编指令。 <code>if</code> <code>while</code> <code>for</code> <code>switch</code> 不再叙述。</p>
+<p>函数调用和返回</p>
+<p><code>call</code> 指令只是将返回地址（当前 PC 值）入栈，然后跳转到被调用函数起始处。<code>ret</code> 则从堆栈弹出返回地址并跳转到那个位置。<br>寄存器使用惯例：寄存器 %eax %edx %ecx 被划分为调用者保存寄存器, %ebx, %esi 和 %edi (%esp %ebp) 被划分为被调用者保存寄存器。这个在后面的 csapp 实验中会非常有用，更多的使用惯例：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/X86_calling_conventions">https://en.wikipedia.org/wiki/X86_calling_conventions</a></p>
+<p>书中的一个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">P</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> y = x * x;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> z = Q(y);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y + z;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GCC 可以将 变量 y 包括在寄存器中，以避免出栈入栈操作。</p>
+<p><code>esp</code> 一直指向栈顶，很少变化，<code>ebp</code> 一般在函数起始设置，便于寻找传递的参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pushq	%rbp</span><br><span class="line">movq	%rsp, %rbp</span><br><span class="line">//</span><br><span class="line">// movl	8(%rbp), %eax</span><br><span class="line">//</span><br><span class="line">// 如果有使用需要恢复 %rsp    movq	%rbp, %rsp </span><br><span class="line">popq	%rbp</span><br></pre></td></tr></table></figure>
+
+<p>在堆栈上存储空间分配，随便写的一段代码，假设有四个变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">call</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> z = <span class="number">4</span>;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">8</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成的汇编代码：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">subq	<span class="number">$16</span>, %rsp // 分配 <span class="number">4</span> * size(<span class="keyword">int</span>) 空间</span><br><span class="line">movl	%edi, -<span class="number">4</span>(%rbp) // 把参数赋值给 i</span><br><span class="line">movl	<span class="number">$3</span>, -<span class="number">8</span>(%rbp)</span><br><span class="line">movl	<span class="number">$4</span>, -<span class="number">12</span>(%rbp)</span><br><span class="line">movl	<span class="number">$8</span>, -<span class="number">16</span>(%rbp)</span><br></pre></td></tr></table></figure>
+
+<h3 id="缓冲区溢出"><a href="#缓冲区溢出" class="headerlink" title="缓冲区溢出"></a>缓冲区溢出</h3><p>书中的例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">echo</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">4</span>];</span><br><span class="line">    getBuf(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>堆栈上只分配了 4 个字节给 buf, 如果 <code>getBuf</code> 写入的超过 4 个字节就会出现缓冲区溢出 <code>buffer overflow</code>。栈顶存放的是返回地址，所以很容易被攻击。本书设计的实验 <code>Attack Lab</code> 就是让你利用这个漏洞进行攻击。简单来说就是覆盖返回地址，可以是当前堆栈，然后在堆栈上放置自己的指令。现在的操作系统和编译器也有一些应对之法：随机栈（栈地址不再是连续的），栈破坏检测，限制可执行代码。即便不能执行堆栈上指令，也可以利用 ROP 攻击。本身是因为返回地址还在堆栈上，可以让它指向我们想要执行的代码片段，可利用的代码片段通常是以 <code>ret</code> 结尾，可以拿回控制权，所以称为 ROP (Return-oriented Programming)。</p>
+<h2 id="处理器体系结构"><a href="#处理器体系结构" class="headerlink" title="处理器体系结构"></a>处理器体系结构</h2><p>大部分篇幅都在讲指令流水，这倒不陌生。</p>
+<p>寄存器文件的两个写端口允许每个时钟周期更新两个程序寄存器，可以用特殊端口，不选中寄存器。<br>原则：不会为了完成一条指令的执行而去读由该指令更新的状态<br>反例：push 先将 %esp 减 4 再将更新后的 %esp 值作为写地址。</p>
+<p>书中的图片 4.39 和 4.41 解释了很多内容。除了控制指令之外，写回阶段也可能存在冲突，这个是数据相关性问题，还有一个问题是取指和访存也可能相关。数据冒险类型：程序寄存器；程序计数器（控制转移）；存储器和取指。</p>
+<p>避免数据冒险</p>
+<p>暂停，在解码阶段暂停，插入 nop </p>
+<p>转发，不必等到写回阶段，不能处理加载使用。还是需要等待上条指令的访存写回结束。</p>
+<p>还有很多指令流水的细节在之前可能没有接触过。</p>
+<h2 id="优化程序性能"><a href="#优化程序性能" class="headerlink" title="优化程序性能"></a>优化程序性能</h2><p>这一章非常实用。编译器优化不能改变代码的行为，书中第一个例子很有启发性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void twiddle1(int *xp, int *yp) &#123;</span><br><span class="line">    *xp += *yp;</span><br><span class="line">    *xp += *yp;</span><br><span class="line">&#125;</span><br><span class="line">void twiddle2(int *xp, int *yp) &#123;</span><br><span class="line">    *xp += 2 * *yp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果 xp &#x3D;&#x3D; yp 这两个函数的结果可能会不同，编译器必须假设不同指针可能指向同一位置。</p>
+<p>妨碍优化的因素：存储器别名使用；函数调用（无法确定一个函数是纯函数）</p>
+<ol>
+<li>消除循环的低效率：移动代码（只需执行一次的代码）只是运算的话编译器优化就可以做到。</li>
+<li>减少过程调用</li>
+<li>消除不必要的存储器引用</li>
+<li>提高并行性</li>
+<li>循环分割</li>
+<li>寄存器溢出（不足）</li>
+</ol>
+<p>在做对应的实验的时候，因为环境的原因（较高的GCC 版本7.5.0以及本地机器配置更好），编译器优化的结果都比基准测试高很多，即使是同样的代码性能也比别人的高出一倍。<br>实验中的一些发现：</p>
+<ol>
+<li>可能因为缓存的原因，第一个函数调用耗时较长，注意多注册一次进行对比。</li>
+<li>简单的运算编译器已做优化，没必要人工避免重复运算。</li>
+<li>即便在循环内消除简单的函数调用（max, min），也不会带来明显提升，可能是编译器已对此类函数进行了优化，也可能是函数本身开销很小，参数寄存器足够，只有返回地址进栈出栈。</li>
+<li>循环内消除复杂的函数调用（avg）提升明显。</li>
+<li>循环分割几乎对性能没有改进</li>
+</ol>
+<p>优化必须定位到瓶颈</p>
+<h2 id="存储器层次结构"><a href="#存储器层次结构" class="headerlink" title="存储器层次结构"></a>存储器层次结构</h2><p>这一章的内容比较熟悉，不确定现在的存储器性能与 CPU 相比是否差距在缩小，书上的数据截止到 2000 年。检查了下自己的机器：<br>Memory LPDDR3 的速度是 2133 MHZ  CPU 是 2.9GHZ，硬盘的数据看不到。这样看的话，差距并没有在继续拉大。</p>
+<p>局部性（空间和时间），可以说层次结构就是建立在局部性之上的。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>这一部分内容不熟，所以整个记录下。<br>假设我们有这样的两个 c 文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.c</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">()</span>;</span><br><span class="line"><span class="type">int</span> buf[<span class="number">2</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    swap();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//swap.c</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> buf[];</span><br><span class="line"><span class="type">int</span> *bufp0 = &amp;buf[<span class="number">0</span>];</span><br><span class="line"><span class="type">int</span> *bufp1;</span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    bufp1 = &amp;buf[<span class="number">1</span>];</span><br><span class="line">    temp = *bufp0;</span><br><span class="line">    *bufp0 = *bufp1;</span><br><span class="line">    *bufp1 = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行 <code>gcc -v -O2 -g -o p main.c swap.c</code> 可以发现先是生成了两个目标文件 <code>main.o</code> 和 <code>swap.o</code>，然后 <code>ld</code> 将两个文件链接起来。</p>
+<p>链接器就是以一组可重定位目标文件为输入，生成一个可执行文件。<br>为了创建可执行文件，链接器的任务：</p>
+<ol>
+<li>符号解析</li>
+<li>重定位</li>
+</ol>
+<h3 id="ELF-可重定位目标文件"><a href="#ELF-可重定位目标文件" class="headerlink" title="ELF 可重定位目标文件"></a>ELF 可重定位目标文件</h3><p>ELF 头部<br>.text 已编译程序的机器代码<br>.rodata 只读数据<br>.data 已初始化的全局 C 变量，局部变量在运行时被保存在栈中，即不在.data 也不在.bss<br>.bss 未初始化的全局 C 变量，在目标文件不占用空间<br>.symtab 符号表 存放在程序中被定义和引用的函数和全部变量信息<br>.rel.text<br>.rel.data<br>.debug 调试符号表<br>.line C 代码行号和.text机器指令之间的映射，调试使用<br>.strtab 字符串表</p>
+<p>符号表中每个表目：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int name: 字符串表中偏移</span><br><span class="line">int value: 对应节中偏移</span><br><span class="line">int size: 大小</span><br><span class="line">char type:4 (data, func,)</span><br><span class="line">    binding:4;</span><br><span class="line">char section: 节头索引</span><br></pre></td></tr></table></figure>
+
+<p>从这儿可以看出，符号表的建立主要是链接需要，本地变量是不在符号表上的。如果一个符号没有在当前模块定义，编译器会假定它定义在其它模块。如果有多个定义，要么抛错，要么选择一个。规则是不允许有多个强符号（函数和已初始化的全局变量），可以有多个弱符号（未初始化的全局变量）。</p>
+<h3 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h3><p>在编译的时候，并不检查某个函数是否在外部已经定义。在链接的时候就需要指定目标函数的模块了，但是对于标准函数来说，一一指定也太过复杂。静态库可以理解为一组目标文件，毕竟我们在执行链接的时候也不希望一个一个指定依赖的模块。如果所有的标准函数打包成一个大的目标文件，然后进行链接，每次生成得到可执行文件都太过庞大和臃肿。在与静态库链接的时候可以只从中只取需要的文件，整个过程就是维护一个集合：可执行文件和未定义符号，对于目标文件来说直接就链接了，对于归档文件，尝试匹配为定义符号，如果某个存档成员 m 定义了该符号，将其添加进来。继续扫描，直到集合不再变化。如果最后集合依然含有未解析符号，那就抛出错误。这儿就要注意，库和目标文件的顺序是有影响的，不难理解。在 windows 下静态库文件是 <code>**.lib</code> 而 linux 下是 <code>**.a</code> 。<br>可用命令 <code>objdump -a /usr/lib/某个路径/libc.a</code> 查看静态库文件包含的目标文件。</p>
+<h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h3><p>完成符号解析之后，接下来开始重定位，首先合并模块，并为每个符号分配运行时地址。重定位分两个步骤：</p>
+<ol>
+<li>重定位节和符号定义。将目标文件中的相同节合并成为同一类型的新节。</li>
+<li>重定位节中的符号引用。</li>
+</ol>
+<p>第一步不难理解。现在说说第二步，我们上面说了编译代码的时候不关心外部定义的，但是如果我们调用一个外部函数，怎么确定它的地址呢？现在已经编译成 <code>call address</code> 的机器指令了的。如果我们之前没留空了，现在就需要补上了。要正确的补空，就需要重定位表目这个东西。</p>
+<p>重定位表目<br>代码的重定位表目：.relo.text 数据的在 .relo.data 里面的条目格式也简单</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> sturct &#123;</span><br><span class="line">    <span class="type">int</span> offset; <span class="comment">// 在节中的偏移</span></span><br><span class="line">    <span class="type">int</span> symbol: <span class="number">24</span> <span class="comment">//</span></span><br><span class="line">        type: <span class="number">8</span>;</span><br><span class="line">&#125; Elf32_Rel;</span><br></pre></td></tr></table></figure>
+
+<h3 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h3><p>链接器生成的可执行目标文件和之前介绍的可重定位目标文件相似， <code>.init</code> 节定义了一个小函数，初始化代码会调用。当然刚说的 .relo 节不再需要了。还有一个段头表值得一说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LOAD off    0x0000000000001000 vaddr 0x0000000000401000 paddr 0x0000000000401000 align 2**12</span><br><span class="line">         filesz 0x00000000000001cd memsz 0x00000000000001cd flags r-x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>off 文件偏移， vaddr&#x2F;paddr 虚拟&#x2F;物理地址 ，align 段对齐，filesz 目标文件段大小，memsz 存储器中段大小，flags 运行时许可。</p>
+<h3 id="加载可执行目标文件"><a href="#加载可执行目标文件" class="headerlink" title="加载可执行目标文件"></a>加载可执行目标文件</h3><p>shell 会调用加载器来运行它。默认情况下，代码段是从 0x8048000 开始（32位）， 0x400000 （64 位），当然可以链接时可以指定。这儿应该有一张图，linux 运行时存储器映像。从 0x8048000 往上包括，只读段，读写段，运行时堆（malloc 创建），0x40000000 共享库，0xc0000000 往下是用户栈，往上是内核虚拟区。</p>
+<p><img src="/gallery/site/linux-memory.png" alt="linux 运行时存储器映像"></p>
+<p>更多阅读《程序员的自我修养-链接、装载与库》</p>
+<h3 id="动态链接共享库"><a href="#动态链接共享库" class="headerlink" title="动态链接共享库"></a>动态链接共享库</h3><p>静态库的缺点很明显：无法共享，必须重新链接才能更新。<br>共享库可以在运行时加载到任意地址，这个过程叫动态链接。（window 下 .dll 文件， Unix 下 .so 文件）</p>
+<h3 id="PIC-与位置无关的代码"><a href="#PIC-与位置无关的代码" class="headerlink" title="PIC 与位置无关的代码"></a>PIC 与位置无关的代码</h3><p>上面讲的重定位技术，会修改代码段的引用，这样做需要链接器修改代码。如果代码是位置无关的，就可以在任意地址加载和执行这些代码。PIC 就是把这些需要修改的空移到数据段上，在数据段开始的地方创建了一个全局偏移量表 GOT。这个实现起来也不难，就是看你需要 5 条指令而不是一条。<br>PIC 函数调用也需要几条指令拿到地址然后调用函数，为了节省指令，编译系统使用延迟绑定，将过程地址的绑定推迟到第一次调用该过程时。第一次调用过程的开销很大，但是其后的每次调用只需要一条指令和一个间接的存储器引用。为了实现延迟绑定，需要过程链接表 PLT，说白了就是第一次结束之后修改 GOT 的跳转位置。在反编译的时候可以看到有很多这样的条目。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0000000000400cb0 &lt;strcpy@plt&gt;:</span><br><span class="line">  400cb0:	ff 25 6a 33 20 00    	jmpq   *0x20336a(%rip)        # 604020 &lt;strcpy@GLIBC_2.2.5&gt;</span><br><span class="line">  400cb6:	68 04 00 00 00       	pushq  $0x4</span><br><span class="line">  400cbb:	e9 a0 ff ff ff       	jmpq   400c60 &lt;.plt&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常控制流"><a href="#异常控制流" class="headerlink" title="异常控制流"></a>异常控制流</h2><h2 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h2><p>这个更熟悉不过了，这个设计也很精妙。</p>
+<p>在读这一章的时候，我在想，这些需要软件和硬件配合的设计在最开始整个系统由一个人设计的时候可能会出现。在现在分工越来越高的情况下，估计很难再出现这样的设计了。</p>
+<h2 id="程序间的交互"><a href="#程序间的交互" class="headerlink" title="程序间的交互"></a>程序间的交互</h2><p>整个第三部分都很熟悉,这儿只是简单讲解了系统IO，网络编程，并发编程。</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><a class="link-muted mr-2" rel="tag" href="/tags/CS/">CS</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/04/10/journeyman/%E3%80%8A%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85%E3%80%8B%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">《浪潮之巅》笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/02/23/journeyman/Clean-Architecture-%E7%AC%94%E8%AE%B0/"><span class="level-item">《Clean Architecture》 笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://blog.feibyte.com/2020/03/29/journeyman/CSAPP-%E7%AC%94%E8%AE%B0/';
+            this.page.identifier = '2020/03/29/journeyman/CSAPP-笔记/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">51</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">学习笔记</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/"><span class="level-start"><span class="level-item">实践总结</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">技术杂谈</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/"><span class="level-start"><span class="level-item">设计实现</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2024/07/19/Designing-data-intensive-applications-note-partition/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 分区"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-19T13:17:22.000Z">2024-07-19</time></p><p class="title"><a href="/2024/07/19/Designing-data-intensive-applications-note-partition/">《Designing Data Intensive Applications》读书笔记 - 分区</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/16/Designing-data-intensive-applications-note-replication/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 数据库复制"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-16T13:17:22.000Z">2024-07-16</time></p><p class="title"><a href="/2024/07/16/Designing-data-intensive-applications-note-replication/">《Designing Data Intensive Applications》读书笔记 - 数据库复制</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/07/07/Designing-data-intensive-applications-note-storage/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 存储和索引"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-07-07T13:17:22.000Z">2024-07-07</time></p><p class="title"><a href="/2024/07/07/Designing-data-intensive-applications-note-storage/">《Designing Data Intensive Applications》读书笔记 - 存储和索引</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/10/Designing-data-intensive-applications-note-transaction/"><img src="/gallery/thumbnails/2024/designing-data-intensive-applications-book.png" alt="《Designing Data Intensive Applications》读书笔记 - 事务"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-10T13:17:22.000Z">2024-06-10</time></p><p class="title"><a href="/2024/06/10/Designing-data-intensive-applications-note-transaction/">《Designing Data Intensive Applications》读书笔记 - 事务</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/06/07/The-DynamoDB-Book-note/"><img src="/gallery/thumbnails/2024/dynamodb-book.png" alt="《The DynamoDB Book》读书笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-06-07T13:17:22.000Z">2024-06-07</time></p><p class="title"><a href="/2024/06/07/The-DynamoDB-Book-note/">《The DynamoDB Book》读书笔记</a></p><p class="categories"><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="tag">读书笔记</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DataBase/"><span class="tag">DataBase</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tag">工具</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DynamoDB/"><span class="tag">DynamoDB</span><span class="tag">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
