@@ -5,7 +5,7 @@ keywords: null
 author: Fedeoo
 language: en
 timezone: ''
-url: http://blog.feibyte.com/en
+url: https://blog.feibyte.com/en
 root: /en
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null

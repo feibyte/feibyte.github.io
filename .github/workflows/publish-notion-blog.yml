@@ -80,4 +80,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: /tmp/site
-          cname: blog.feibyte.com
