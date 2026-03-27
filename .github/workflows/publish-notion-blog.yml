@@ -1,0 +1,83 @@
+name: Publish Notion Blog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 14 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            blog-cn/package-lock.json
+            blog-en/package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install blog-cn dependencies
+        run: npm ci
+        working-directory: blog-cn
+
+      - name: Install blog-en dependencies
+        run: npm ci
+        working-directory: blog-en
+
+      - name: Sync posts from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: npm run sync:notion
+
+      - name: Commit synced content
+        id: sync_commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .notion-sync blog-cn/source/_posts blog-cn/source/notion-assets blog-en/source/_posts blog-en/source/notion-assets
+          if git diff --cached --quiet; then
+            echo "No synced content changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "chore: sync notion content"
+          git push origin HEAD:master
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Build Chinese blog
+        if: steps.sync_commit.outputs.changed == 'true'
+        run: npm run clean && npm run build
+        working-directory: blog-cn
+
+      - name: Build English blog
+        if: steps.sync_commit.outputs.changed == 'true'
+        run: npm run clean && npm run build
+        working-directory: blog-en
+
+      - name: Combine build output
+        if: steps.sync_commit.outputs.changed == 'true'
+        run: |
+          mkdir -p /tmp/site/en
+          cp -R blog-cn/public/. /tmp/site/
+          cp -R blog-en/public/. /tmp/site/en/
+
+      - name: Deploy to gh-pages
+        if: steps.sync_commit.outputs.changed == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/site
+          cname: blog.feibyte.com

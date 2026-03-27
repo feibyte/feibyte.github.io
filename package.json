@@ -1,0 +1,12 @@
+{
+  "name": "feibyte-notion-sync",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:notion": "node scripts/sync-notion.mjs",
+    "sync:notion:dry-run": "node scripts/sync-notion.mjs --dry-run"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}
