@@ -15,6 +15,14 @@
       "publishDate": "2026-03-20T12:34:00.000Z",
       "status": "Published",
       "updated": "2026-03-27T10:00:00.000Z"
+    },
+    "32fc98c8-f668-8072-82a1-c070216b5594": {
+      "filePath": "blog-cn/source/_posts/32fc98c8-f668-8072-82a1-c070216b5594.md",
+      "lang": "zh",
+      "notionTitle": "为什么 async/await 杀不死 Generator？",
+      "publishDate": "2026-03-26T10:34:00.000Z",
+      "status": "Published",
+      "updated": "2026-03-28T03:06:00.000Z"
     }
   }
 }
