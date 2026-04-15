@@ -23,6 +23,14 @@
       "publishDate": "2026-03-26T10:34:00.000Z",
       "status": "Published",
       "updated": "2026-03-31T09:21:00.000Z"
+    },
+    "343c98c8-f668-8086-b4e7-c02d3b982528": {
+      "filePath": "blog-en/source/_posts/343c98c8-f668-8086-b4e7-c02d3b982528.md",
+      "lang": "en",
+      "notionTitle": "Command vs Event: It’s About Where the Logic Lives",
+      "publishDate": "2026-04-15T10:07:00.000Z",
+      "status": "Published",
+      "updated": "2026-04-15T10:53:00.000Z"
     }
   }
 }
