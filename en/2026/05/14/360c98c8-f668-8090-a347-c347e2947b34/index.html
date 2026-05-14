@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><title>Frontend Architecture and the Illusion of Boundaries - Fedeoo&#039;s Blog</title><link rel="manifest" href="/en/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="IntroductionRecently I reviewed a proposal in our Angular codebase introducing domain-based folders and facades between domains. On the surface, it makes sense:  split code into domains  avoid cross-d"><meta property="og:type" content="blog"><meta property="og:title" content="Frontend Architecture and the Illusion of Boundaries"><meta property="og:url" content="https://blog.feibyte.com/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="IntroductionRecently I reviewed a proposal in our Angular codebase introducing domain-based folders and facades between domains. On the surface, it makes sense:  split code into domains  avoid cross-d"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://blog.feibyte.com/en/img/og_image.png"><meta property="article:published_time" content="2026-05-14T04:07:00.000Z"><meta property="article:modified_time" content="2026-05-14T04:08:00.000Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="Enginerring"><meta property="article:tag" content="Architecture"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.feibyte.com/en/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.feibyte.com/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/"},"headline":"Frontend Architecture and the Illusion of Boundaries","image":["https://blog.feibyte.com/en/img/og_image.png"],"datePublished":"2026-05-14T04:07:00.000Z","dateModified":"2026-05-14T04:08:00.000Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"https://blog.feibyte.com/gallery/site/logo.png"}},"description":"IntroductionRecently I reviewed a proposal in our Angular codebase introducing domain-based folders and facades between domains. On the surface, it makes sense:  split code into domains  avoid cross-d"}</script><link rel="canonical" href="https://blog.feibyte.com/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/"><link rel="icon" href="/en/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/en/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/en/"><img src="/en/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/en/">Home</a><a class="navbar-item" href="/en/archives">Archives</a><a class="navbar-item" href="/en/categories">Categories</a><a class="navbar-item" href="/en/tags">Tags</a><a class="navbar-item" href="/en/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="简体中文" href="https://blog.feibyte.com/">简体中文</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2026-05-14T04:07:00.000Z" title="5/14/2026, 4:07:00 AM">2026-05-14</time></span><span class="level-item">Updated&nbsp;<time dateTime="2026-05-14T04:08:00.000Z" title="5/14/2026, 4:08:00 AM">2026-05-14</time></span><span class="level-item">3 minutes read (About 518 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Frontend Architecture and the Illusion of Boundaries</h1><div class="content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Recently I reviewed a proposal in our Angular codebase introducing domain-based folders and facades between domains.</p>
+<p>On the surface, it makes sense:</p>
+<ul>
+<li><p>split code into domains</p>
+</li>
+<li><p>avoid cross-domain imports</p>
+</li>
+<li><p>expose public APIs</p>
+</li>
+<li><p>use facades for communication</p>
+</li>
+</ul>
+<p>But it raised a deeper question:</p>
+<blockquote>
+<p>Are we actually reducing complexity, or just adding structure to manage complexity created by our architecture?</p>
+</blockquote>
+<hr>
+<h2 id="Frontend-vs-Backend-Different-Nature-of-Problems"><a href="#Frontend-vs-Backend-Different-Nature-of-Problems" class="headerlink" title="Frontend vs Backend: Different Nature of Problems"></a>Frontend vs Backend: Different Nature of Problems</h2><p>Backend systems naturally fit Domain-Driven Design because they deal with:</p>
+<ul>
+<li><p>business consistency</p>
+</li>
+<li><p>transactional boundaries</p>
+</li>
+<li><p>long-lived domain rules</p>
+</li>
+<li><p>data ownership</p>
+</li>
+</ul>
+<p>Frontend systems are fundamentally different. They are:</p>
+<ul>
+<li><p>user-flow driven</p>
+</li>
+<li><p>interaction-driven</p>
+</li>
+<li><p>UI composition driven</p>
+</li>
+<li><p>rapidly changing with UX</p>
+</li>
+</ul>
+<p>A single user journey often spans multiple backend domains:</p>
+<ul>
+<li><p>account</p>
+</li>
+<li><p>payments</p>
+</li>
+<li><p>address</p>
+</li>
+<li><p>notifications</p>
+</li>
+</ul>
+<p>But to the user, it is still one flow.</p>
+<p>This difference matters more than we usually admit.</p>
+<hr>
+<h2 id="A-Concrete-Example-Cross-Domain-Flow-in-Angular"><a href="#A-Concrete-Example-Cross-Domain-Flow-in-Angular" class="headerlink" title="A Concrete Example: Cross-Domain Flow in Angular"></a>A Concrete Example: Cross-Domain Flow in Angular</h2><p>Take a simple flow:</p>
+<blockquote>
+<p>A user applies for a new card and updates their mailing address during the process.</p>
+</blockquote>
+<p>In a domain-split Angular architecture, this is typically divided into:</p>
+<ul>
+<li><p>Card domain</p>
+</li>
+<li><p>Customer domain</p>
+</li>
+</ul>
+<p>Now Card needs to trigger an update in Customer.</p>
+<p>Because direct access is discouraged, we introduce:</p>
+<ul>
+<li><p>a Customer facade</p>
+</li>
+<li><p>an interface contract</p>
+</li>
+<li><p>an implementation hidden behind store&#x2F;effects&#x2F;services</p>
+</li>
+</ul>
+<p>So the flow becomes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Card Domain</span><br><span class="line">  -&gt; Customer Facade Interface</span><br><span class="line">      -&gt; Customer Facade Implementation</span><br><span class="line">          -&gt; State / Effects / API</span><br></pre></td></tr></table></figure>
+
+<p>A simple user intent becomes a multi-layered coordination chain.</p>
+<hr>
+<h2 id="Why-This-Feels-Strange-in-React"><a href="#Why-This-Feels-Strange-in-React" class="headerlink" title="Why This Feels Strange in React"></a>Why This Feels Strange in React</h2><p>To React developers, this often feels unnecessary.</p>
+<p>Not because cross-feature dependencies don’t exist — they absolutely do — but because React tends to handle them differently.</p>
+<p>Instead of introducing:</p>
+<ul>
+<li><p>domain facades</p>
+</li>
+<li><p>interface contracts</p>
+</li>
+<li><p>global orchestration layers</p>
+</li>
+</ul>
+<p>React relies more on:</p>
+<ul>
+<li><p>component composition</p>
+</li>
+<li><p>local state ownership</p>
+</li>
+<li><p>direct capability usage through hooks</p>
+</li>
+</ul>
+<p>Dependencies are handled through composition, not architectural indirection.</p>
+<hr>
+<h2 id="The-Real-Question"><a href="#The-Real-Question" class="headerlink" title="The Real Question"></a>The Real Question</h2><p>This leads to a more important question:</p>
+<blockquote>
+<p>If the dependency already exists in the user flow, what do we actually gain by wrapping it in facades and domain boundaries?</p>
+</blockquote>
+<p>We are not removing coupling.</p>
+<p>We are:</p>
+<ul>
+<li><p>formalizing it</p>
+</li>
+<li><p>layering it</p>
+</li>
+<li><p>redistributing it across abstractions</p>
+</li>
+</ul>
+<p>So the real question becomes:</p>
+<blockquote>
+<p>If coupling is unavoidable in frontend flows, should we organize the system around domains at all — or around user flows instead?</p>
+</blockquote>
+<hr>
+<h2 id="The-Microservice-Parallel"><a href="#The-Microservice-Parallel" class="headerlink" title="The Microservice Parallel"></a>The Microservice Parallel</h2><p>This feels very similar to microservices.</p>
+<p>Many systems moved from monoliths to microservices believing:</p>
+<blockquote>
+<p>the monolith is the problem</p>
+</blockquote>
+<p>But often the real issue was:</p>
+<ul>
+<li><p>poor modularization</p>
+</li>
+<li><p>unclear boundaries</p>
+</li>
+<li><p>tight coupling</p>
+</li>
+</ul>
+<p>So complexity was not reduced — it was moved across boundaries.</p>
+<p>Frontend architecture can fall into the same pattern:</p>
+<ul>
+<li><p>domains</p>
+</li>
+<li><p>facades</p>
+</li>
+<li><p>interfaces</p>
+</li>
+<li><p>orchestration layers</p>
+</li>
+</ul>
+<p>We may end up managing complexity instead of reducing it.</p>
+<hr>
+<h2 id="Conclusion-Boundaries-Should-Follow-Workflows"><a href="#Conclusion-Boundaries-Should-Follow-Workflows" class="headerlink" title="Conclusion: Boundaries Should Follow Workflows"></a>Conclusion: Boundaries Should Follow Workflows</h2><p>I still believe modularization matters.</p>
+<p>But frontend systems are not primarily domain systems — they are workflow systems.</p>
+<p>They optimize for:</p>
+<ul>
+<li><p>interaction, not consistency</p>
+</li>
+<li><p>composition, not strict boundaries</p>
+</li>
+<li><p>user flows, not domain purity</p>
+</li>
+</ul>
+<p>In many cases, workflow or feature-level boundaries are more natural than backend-style domain boundaries.</p>
+<p>Good frontend architecture should reduce coordination cost and improve composability — not introduce layers that only exist to manage existing layers.</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/en/tags/Enginerring/">Enginerring</a><a class="link-muted mr-2" rel="tag" href="/en/tags/Architecture/">Architecture</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/en/2026/04/15/343c98c8-f668-8086-b4e7-c02d3b982528/"><span class="level-item">Command vs Event: It’s About Where the Logic Lives</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.feibyte.com/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/';
+            this.page.identifier = '2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/en/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/en/archives"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/en/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/en/tags"><p class="title">20</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/en/categories/Explorations/"><span class="level-start"><span class="level-item">Explorations</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-05-14T04:07:00.000Z">2026-05-14</time></p><p class="title"><a href="/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/">Frontend Architecture and the Illusion of Boundaries</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-04-15T10:07:00.000Z">2026-04-15</time></p><p class="title"><a href="/en/2026/04/15/343c98c8-f668-8086-b4e7-c02d3b982528/">Command vs Event: It’s About Where the Logic Lives</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-03-20T12:34:00.000Z">2026-03-20</time></p><p class="title"><a href="/en/2026/03/20/329c98c8-f668-806a-98f3-f9e2885e8f21/">Error Handling &amp; Logging Best Practice</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/en/2026/01/23/tsconfig-issues/"><img src="/en/gallery/thumbnails/typescript.png" alt="Two TypeScript Config Issues I Recently Hit"></a></figure><div class="media-content"><p class="date"><time dateTime="2026-01-23T18:49:49.000Z">2026-01-23</time></p><p class="title"><a href="/en/2026/01/23/tsconfig-issues/">Two TypeScript Config Issues I Recently Hit</a></p><p class="categories"><a href="/en/categories/Explorations/">Explorations</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/en/2025/10/16/page-object-model-pattern/"><img src="/en/gallery/thumbnails/playwright.png" alt="Page Object Model Pattern"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-10-16T23:17:22.000Z">2025-10-16</time></p><p class="title"><a href="/en/2025/10/16/page-object-model-pattern/">Page Object Model Pattern</a></p><p class="categories"><a href="/en/categories/Explorations/">Explorations</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/en/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/FE/"><span class="tag">FE</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Enginerring/"><span class="tag">Enginerring</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/AWS/"><span class="tag">AWS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Architecture/"><span class="tag">Architecture</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/%E6%9E%B6%E6%9E%84/"><span class="tag">架构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/DDD/"><span class="tag">DDD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Client/"><span class="tag">Client</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/en/"><img src="/en/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2026 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/en/js/column.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/en/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/en/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/en/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/en/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
