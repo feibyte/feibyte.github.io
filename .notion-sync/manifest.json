@@ -31,6 +31,14 @@
       "publishDate": "2026-04-15T10:07:00.000Z",
       "status": "Published",
       "updated": "2026-04-15T10:53:00.000Z"
+    },
+    "360c98c8-f668-8090-a347-c347e2947b34": {
+      "filePath": "blog-en/source/_posts/360c98c8-f668-8090-a347-c347e2947b34.md",
+      "lang": "en",
+      "notionTitle": "Frontend Architecture and the Illusion of Boundaries",
+      "publishDate": "2026-05-14T04:07:00.000Z",
+      "status": "Published",
+      "updated": "2026-05-14T04:08:00.000Z"
     }
   }
 }
