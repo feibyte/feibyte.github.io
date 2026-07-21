@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="google-site-verification" content="aG_tXROG9wF9yK4g29KmnltUUXyLK5SBAWKIXDkz6vU"><title>Don&#039;t Design Components. Discover Them. - Fedeoo&#039;s Blog</title><link rel="manifest" href="/en/manifest.json"><meta name="application-name" content="Fedeoo&#039;s Blog"><meta name="msapplication-TileImage" content="/gallery/site/shark.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fedeoo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Recently, while working on our Design System, I realized that most of our discussions weren’t really about implementation—they were about abstraction. It started with what seemed like a straightforwar"><meta property="og:type" content="blog"><meta property="og:title" content="Don&#039;t Design Components. Discover Them."><meta property="og:url" content="https://blog.feibyte.com/en/2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/"><meta property="og:site_name" content="Fedeoo&#039;s Blog"><meta property="og:description" content="Recently, while working on our Design System, I realized that most of our discussions weren’t really about implementation—they were about abstraction. It started with what seemed like a straightforwar"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://blog.feibyte.com/en/img/og_image.png"><meta property="article:published_time" content="2026-07-20T11:56:00.000Z"><meta property="article:modified_time" content="2026-07-20T12:05:00.000Z"><meta property="article:author" content="Fedeoo"><meta property="article:tag" content="Enginerring"><meta property="article:tag" content="Design System"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.feibyte.com/en/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.feibyte.com/en/2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/"},"headline":"Don't Design Components. Discover Them.","image":["https://blog.feibyte.com/en/img/og_image.png"],"datePublished":"2026-07-20T11:56:00.000Z","dateModified":"2026-07-20T12:05:00.000Z","author":{"@type":"Person","name":"Fedeoo"},"publisher":{"@type":"Organization","name":"Fedeoo's Blog","logo":{"@type":"ImageObject","url":"https://blog.feibyte.com/gallery/site/logo.png"}},"description":"Recently, while working on our Design System, I realized that most of our discussions weren’t really about implementation—they were about abstraction. It started with what seemed like a straightforwar"}</script><link rel="canonical" href="https://blog.feibyte.com/en/2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/"><link rel="icon" href="/en/gallery/site/shark.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/en/css/default.css"><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-773NDPTQE0" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-773NDPTQE0');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/en/"><img src="/en/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/en/">Home</a><a class="navbar-item" href="/en/archives">Archives</a><a class="navbar-item" href="/en/categories">Categories</a><a class="navbar-item" href="/en/tags">Tags</a><a class="navbar-item" href="/en/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="简体中文" href="https://blog.feibyte.com/">简体中文</a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/feibyte/feibyte.github.io"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2026-07-20T11:56:00.000Z" title="7/20/2026, 11:56:00 AM">2026-07-20</time></span><span class="level-item">Updated&nbsp;<time dateTime="2026-07-20T12:05:00.000Z" title="7/20/2026, 12:05:00 PM">2026-07-20</time></span><span class="level-item">5 minutes read (About 729 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Don&#039;t Design Components. Discover Them.</h1><div class="content"><h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>Recently, while working on our Design System, I realized that most of our discussions weren’t really about implementation—they were about abstraction.</p>
+<p>It started with what seemed like a straightforward request from design: implement a reusable <strong>Progress Tile</strong> component.</p>
+<p>The design library presented it as a single component with four layout variations. At first glance, the implementation looked simple enough. We could build a configurable component with a handful of variants and expose enough props to support every layout.</p>
+<p>But the more we explored the design, the more uncomfortable it became.</p>
+<p>That experience led me to two important questions.</p>
+<h2 id="1-Configuration-or-Composition"><a href="#1-Configuration-or-Composition" class="headerlink" title="1. Configuration or Composition?"></a>1. Configuration or Composition?</h2><p>The easiest way to implement the Progress Tile would have been to create a highly configurable component.</p>
+<p>Internally, it contained a <code>Card</code>, <code>Progress</code>, <code>Button</code>, <code>Badge</code>, images, labels, descriptions, and other elements. Every new variation introduced another configuration option.</p>
+<p>Eventually, the API would start looking something like this:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">ProgressTile</span></span><br><span class="line">  cardProps=&#123;...&#125;</span><br><span class="line">  progressProps=&#123;...&#125;</span><br><span class="line">  buttonProps=&#123;...&#125;</span><br><span class="line">  badgeProps=&#123;...&#125;</span><br><span class="line">  image=&#123;...&#125;</span><br><span class="line">  description=&#123;...&#125;</span><br><span class="line">  ...</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>At first, this feels convenient.</p>
+<p>Over time, however, the wrapper becomes tightly coupled to all of its children. Every time a child component evolves, the wrapper must expose another prop or another variant. The abstraction becomes harder to understand than the UI it was trying to simplify.</p>
+<p>This reminded us of a lesson we’d already learned from some of our page components. They started simple, but gradually accumulated more and more configuration until they became difficult to evolve.</p>
+<p>Instead of making configuration our default, we’ve adopted a different principle:</p>
+<blockquote>
+<p><strong>Prefer composition over configuration.</strong></p>
+</blockquote>
+<p>This doesn’t mean configuration is bad.</p>
+<p>Configuration works well when a component has a stable responsibility and well-understood variations. Components like <code>Button</code>, <code>Progress</code>, or <code>Badge</code> are excellent examples.</p>
+<p>Composition, however, is usually a better default while the design is still evolving.</p>
+<p>A good example is a <code>Dialog</code>. We can provide a composable foundation:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Dialog</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Dialog.Header</span> /&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Dialog.Body</span> /&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Dialog.Footer</span> /&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Dialog</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>and then build opinionated components such as <code>SimpleDialog</code> or <code>ConfirmationDialog</code> on top of it.</p>
+<p>Composition provides flexibility, while reusable components emerge naturally once the abstraction has proven itself.</p>
+<h2 id="2-Is-It-Actually-a-Component"><a href="#2-Is-It-Actually-a-Component" class="headerlink" title="2. Is It Actually a Component?"></a>2. Is It Actually a Component?</h2><p>As we continued reviewing the Progress Tile, another question emerged.</p>
+<p>Was it actually a reusable component?</p>
+<p>The more we compared the four layouts, the harder it became to identify a stable structure.</p>
+<p>Some layouts contained images, others didn’t.</p>
+<p>Some placed labels above the progress bar, others beside it.</p>
+<p>Descriptions appeared in different positions.</p>
+<p>Actions moved around.</p>
+<p>The only thing shared across every variation was a progress bar.</p>
+<p>That wasn’t enough to define a reusable engineering abstraction.</p>
+<p>Instead of asking:</p>
+<blockquote>
+<p>“How should we implement this component?”</p>
+</blockquote>
+<p>we found ourselves asking:</p>
+<blockquote>
+<p><strong>“Is there actually a component here to implement?”</strong></p>
+</blockquote>
+<p>Perhaps what design had created wasn’t an engineering component at all.</p>
+<p>Perhaps it was a <strong>design pattern</strong>.</p>
+<p>That distinction changed the entire discussion.</p>
+<p>A design pattern absolutely belongs in the design system because it promotes consistency across products.</p>
+<p>However, a design pattern doesn’t necessarily need to become a single React or Angular component.</p>
+<p>Sometimes documenting a recommended composition of existing primitives is a better engineering abstraction than introducing another configurable component.</p>
+<h2 id="The-Missing-Review"><a href="#The-Missing-Review" class="headerlink" title="The Missing Review"></a>The Missing Review</h2><p>This experience also highlighted something else.</p>
+<p>Many teams have design reviews.</p>
+<p>Many teams have code reviews.</p>
+<p>But very few teams have <strong>abstraction reviews</strong>.</p>
+<p>Someone needs to bridge the gap between design and engineering.</p>
+<p>Their responsibility isn’t simply to translate Figma into code.</p>
+<p>Their responsibility is to decide <strong>how a design should be represented in the design system</strong>.</p>
+<p>When reviewing a proposed component, they might ask:</p>
+<ul>
+<li><p>Is this a token, a primitive, a composite component, a pattern, or simply a business feature?</p>
+</li>
+<li><p>Does it have a clear, single responsibility?</p>
+</li>
+<li><p>Does it have a stable structure?</p>
+</li>
+<li><p>Does it encapsulate meaningful behavior?</p>
+</li>
+<li><p>Will its API remain stable as new use cases appear?</p>
+</li>
+</ul>
+<p>These questions are often more important than discussing props or implementation details.</p>
+<h2 id="Components-Are-Discovered-Not-Designed"><a href="#Components-Are-Discovered-Not-Designed" class="headerlink" title="Components Are Discovered, Not Designed"></a>Components Are Discovered, Not Designed</h2><p>The biggest lesson I took away from this experience is that the hardest part of building a Design System isn’t implementing components.</p>
+<p>It’s discovering the right abstractions.</p>
+<p>Good components usually have three characteristics:</p>
+<ul>
+<li><p>A clear responsibility.</p>
+</li>
+<li><p>A stable structure.</p>
+</li>
+<li><p>Well-defined behavior.</p>
+</li>
+</ul>
+<p>If those qualities don’t exist yet, forcing everything into a configurable component is usually solving the wrong problem.</p>
+<p>Instead, start with smaller primitives, document patterns where appropriate, and allow reusable components to emerge as the design matures.</p>
+<p>In other words:</p>
+<blockquote>
+<p><strong>Don’t design components. Discover them.</strong></p>
+</blockquote>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/en/tags/Enginerring/">Enginerring</a><a class="link-muted mr-2" rel="tag" href="/en/tags/Design-System/">Design System</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/"><span class="level-item">Frontend Architecture and the Illusion of Boundaries</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.feibyte.com/en/2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/';
+            this.page.identifier = '2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'blog-feibyte-com' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/en/gallery/site/shark.png" alt="Fedeoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Fedeoo</p><p class="is-size-6 is-block">Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Sydney</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/en/archives"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/en/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/en/tags"><p class="title">21</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/en/categories/Explorations/"><span class="level-start"><span class="level-item">Explorations</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-07-20T11:56:00.000Z">2026-07-20</time></p><p class="title"><a href="/en/2026/07/20/3a3c98c8-f668-807e-8878-dcd1adf01421/">Don&#039;t Design Components. Discover Them.</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-05-14T04:07:00.000Z">2026-05-14</time></p><p class="title"><a href="/en/2026/05/14/360c98c8-f668-8090-a347-c347e2947b34/">Frontend Architecture and the Illusion of Boundaries</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-04-15T10:07:00.000Z">2026-04-15</time></p><p class="title"><a href="/en/2026/04/15/343c98c8-f668-8086-b4e7-c02d3b982528/">Command vs Event: It’s About Where the Logic Lives</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-03-20T12:34:00.000Z">2026-03-20</time></p><p class="title"><a href="/en/2026/03/20/329c98c8-f668-806a-98f3-f9e2885e8f21/">Error Handling &amp; Logging Best Practice</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/en/2026/01/23/tsconfig-issues/"><img src="/en/gallery/thumbnails/typescript.png" alt="Two TypeScript Config Issues I Recently Hit"></a></figure><div class="media-content"><p class="date"><time dateTime="2026-01-23T18:49:49.000Z">2026-01-23</time></p><p class="title"><a href="/en/2026/01/23/tsconfig-issues/">Two TypeScript Config Issues I Recently Hit</a></p><p class="categories"><a href="/en/categories/Explorations/">Explorations</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/en/tags/Serviceless/"><span class="tag">Serviceless</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Enginerring/"><span class="tag">Enginerring</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/FE/"><span class="tag">FE</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/AWS/"><span class="tag">AWS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Porgamming/"><span class="tag">Porgamming</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Logging/"><span class="tag">Logging</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Error-Handling/"><span class="tag">Error Handling</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/en/tags/Architecture/"><span class="tag">Architecture</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/en/"><img src="/en/gallery/site/logo.png" alt="Fedeoo&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2026 Fedeoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/en/js/column.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/en/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/en/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/en/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/en/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
