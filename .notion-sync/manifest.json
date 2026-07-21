@@ -39,6 +39,14 @@
       "publishDate": "2026-05-14T04:07:00.000Z",
       "status": "Published",
       "updated": "2026-05-14T04:08:00.000Z"
+    },
+    "3a3c98c8-f668-807e-8878-dcd1adf01421": {
+      "filePath": "blog-en/source/_posts/3a3c98c8-f668-807e-8878-dcd1adf01421.md",
+      "lang": "en",
+      "notionTitle": "Don't Design Components. Discover Them.",
+      "publishDate": "2026-07-20T11:56:00.000Z",
+      "status": "Published",
+      "updated": "2026-07-20T12:05:00.000Z"
     }
   }
 }
