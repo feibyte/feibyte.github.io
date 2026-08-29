@@ -47,6 +47,14 @@
       "publishDate": "2026-07-20T11:56:00.000Z",
       "status": "Published",
       "updated": "2026-07-20T12:05:00.000Z"
+    },
+    "3cbc98c8-f668-806c-b403-df461346b1ff": {
+      "filePath": "blog-en/source/_posts/3cbc98c8-f668-806c-b403-df461346b1ff.md",
+      "lang": "en",
+      "notionTitle": "Typed Errors: Is Effect Solving Too Much?",
+      "publishDate": "2026-08-29T01:07:00.000Z",
+      "status": "Published",
+      "updated": "2026-08-29T01:12:00.000Z"
     }
   }
 }
